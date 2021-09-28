@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Linq;
-//TODO  sätt array till 100
-//TODO fixa så man kan fltta ihop 2 mc med varandra 
 //TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
+//TODO  sätt array till 100
+//TODO  fixa så man kan fltta ihop 2 mc med varandra 
 //TODO  fixa utskiften för see vehciles skall inte vara rätt upp och ner 
-//TODO fixa search funktionen
+//TODO  fixa search funktionen
 //TODO
 
 namespace PragueParking
 {
     class Program
     {
-        public static string[] parkingList = new string[100]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
-
+        public static string[] parkingList = new string[10]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
+        public static string[] ticketList = new string[200];
 
         static void Main(string[] args)
         {
@@ -31,7 +31,8 @@ namespace PragueParking
                 "[3] Move ParkSpace\n" +
                 "[4] Remove vehicle\n" +
                 "[5] Search for vehicle\n" +
-                "[6] Quit Program\n");
+                "[6] ticket\n" +
+                "[9] Quit Program\n");
 
 
                 int menuInput = int.Parse(Console.ReadLine());
@@ -55,11 +56,14 @@ namespace PragueParking
                         Search();
                         break;
                     case 6:
+                        ticket();
+                        break;
+                    case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("The number is not in the menu. Enter an number from 1-6");
+                        Console.WriteLine("The number is not in the menu. Enter an number from 1-9");
                         mainMenu();
                         break;
                 }
@@ -117,35 +121,42 @@ namespace PragueParking
             Console.Clear();
 
 
-
-
-            if (parkingList.Contains(carReg + "MC#") || parkingList.Contains("CAR#" + carReg))
+            for (int i = 0; i < parkingList.Length; i++)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                if (parkingList[i] == null)
+                {
+                    if (carReg.Length <= 10 && carReg.Length >= 4)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        recipt = $"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n";
+                        Console.WriteLine("{0}\nPress any key to continue..", recipt);
+                        Console.ReadKey();
+                        spotRecipt = "CAR#" + carReg;
+                        ticketList[i] = "CAR#" + carReg + " " + now;
+                        SpotAllocation(empty, spotRecipt);
+                        Console.Clear();
+                        mainMenu();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("The registration number is to long or to short. Max length is 10 letters and a min of 4 letters.\nPress any key to try again...");
+                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        ParkCar();
+                    }
+                }
+                else if (parkingList[i].Contains(carReg + "MC#") || parkingList[i].Contains("CAR#" + carReg))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.WriteLine("This License plate number is already parked here. Try a diffrent one.");
-                Console.WriteLine("Press any key fo go back to the vehicle menu:");
-                Console.ReadKey();
-                Console.Clear();
-                mainMenu();
-            }
-            else if (carReg.Length <= 10 && carReg.Length >= 4)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                recipt = $"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n";
-                Console.WriteLine("{0}\nPress any key to continue..", recipt);
-                Console.ReadKey();
-                spotRecipt = "CAR#" + carReg;
-                SpotAllocation(empty, spotRecipt);
-                Console.Clear();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("The registration number is to long or to short. Max length is 10 letters and a min of 4 letters.\nPress any key to try again...");
-                Console.ReadKey();
-                Console.ForegroundColor = ConsoleColor.White;
-                ParkCar();
+                    Console.WriteLine("This License plate number is already parked here. Try a diffrent one.");
+                    Console.WriteLine("Press any key fo go back to the vehicle menu:");
+                    Console.ReadKey();
+                    Console.Clear();
+                    mainMenu();
+                }
 
             }
 
@@ -178,12 +189,9 @@ namespace PragueParking
                     mainMenu();
                     break;
                 }
-
             }
-
             if (mcReg.Length >= 4 && mcReg.Length <= 10)
             {
-
                 for (int i = 0; i < parkingList.Length; i++)
                 {
                     if (parkingList[i] != null)
@@ -216,6 +224,7 @@ namespace PragueParking
                         Console.WriteLine("{0} \nPress any key to continue...", recipt);
                         Console.ReadKey();
                         spotRecipt = "MC#" + mcReg;
+                        ticketList[i] = "MC#" + mcReg + " " + now;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         break;
@@ -553,9 +562,32 @@ namespace PragueParking
             mainMenu();
 
         }
-        static void ticket()
+        static void ticket()// fixa checkout
         {
+            Console.Clear();
+            int count = 1;
+            foreach (var ticket in ticketList)
+            {
+                if (ticket == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine("{0}: {1}", count, ticket);
+                    count++;
+                }
+            }
+            DateTime.Today();
+            var date1 = new DateTime(x, y, z, 0, 0, 0);
+            Console.WriteLine(date1.ToString());
+            DateTime controllTime = new DateTime();
 
+
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            mainMenu();
         }
     }
 }
