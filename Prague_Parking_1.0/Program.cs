@@ -245,7 +245,9 @@ namespace PragueParking
         }
         public static void SeeParkedVehicles()
         {
-            const int cols = 1;
+
+
+            const int cols = 6;
             int n = 1;
 
             Console.Clear();
@@ -260,12 +262,12 @@ namespace PragueParking
                 if (parkingList[i] == null)
                 {
                     Console.Write("\t" + i + 1 + ": Empty \t");
-                    
+                    n++;
                 }
                 else
                 {
                     Console.Write("\t" + i + 1 + ": " + parkingList[i] + "\t");
-                    
+                    n++;
                 }
 
             }
