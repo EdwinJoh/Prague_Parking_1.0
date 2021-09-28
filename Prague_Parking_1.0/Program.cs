@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 //TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
-//TODO  sätt array till 100
-//TODO  fixa så man kan fltta ihop 2 mc med varandra 
-//TODO  fixa utskiften för see vehciles skall inte vara rätt upp och ner 
+//TODO  
+//TODO  
+//TODO  
 //TODO  fixa search funktionen
 //TODO
 
@@ -11,7 +11,7 @@ namespace PragueParking
 {
     class Program
     {
-        public static string[] parkingList = new string[10]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
+        public static string[] parkingList = new string[100]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
         public static string[] ticketList = new string[200];
 
         static void Main(string[] args)
@@ -97,7 +97,9 @@ namespace PragueParking
             }
             else if (userInput == 3)
             {
+                Console.Clear();
                 mainMenu();
+
             }
             else
             {
@@ -243,31 +245,36 @@ namespace PragueParking
         }
         public static void SeeParkedVehicles()
         {
-            #region MyRegion
+
+
+            const int cols = 6;
+            int n = 1;
+
             Console.Clear();
-            Console.WriteLine("\t*** Parking lot ***\n");
-            int emptySPace = 0;
-            int counter = 1;
-
-            foreach (var ParkSpace in parkingList)
+            for (int i = 0; i < parkingList.Length; i++)
             {
-                emptySPace++;
-                if (ParkSpace == null)
-                {
-                    Console.WriteLine(" \tParkingspot {0} is empty", emptySPace);
 
+                if (n >= cols && n % cols == 0)
+                {
+                    Console.WriteLine();
+                    n = 1;
+                }
+                if (parkingList[i] == null)
+                {
+                    Console.Write("\t" + i + 1 + ": Empty \t");
+                    n++;
                 }
                 else
-                    Console.WriteLine("\tParkingspot {0} is occupied by {1}", counter, ParkSpace);
-                counter++;
+                {
+                    Console.Write("\t" + i + 1 + ": " + parkingList[i] + "\t");
+                    n++;
+                }
 
             }
-
-            Console.Write("Press any key to retrun to the menu...");
+            Console.Write("\nPress any key to retrun to the menu...");
             Console.ReadKey();
             Console.Clear();
             mainMenu();
-            #endregion
         }
         public static void Move()
         {
@@ -351,7 +358,11 @@ namespace PragueParking
                 }
 
             }
-
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Vehicle {0} is not parked here. Please try again");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
             mainMenu();
         }
         public static void Search()
@@ -495,9 +506,10 @@ namespace PragueParking
 
                             string temp;
                             string seperator = "/MC#";
-                            temp = string.Join(seperator, parkingList[newPSpace-1], userReg);
+                            temp = string.Join(seperator, parkingList[newPSpace - 1], userReg);
                             parkingList[newPSpace - 1] = temp;
                             parkingList[i] = null;
+                            ticketList[i] = "MC#" + userReg + now;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine($"Moved vehicle {userReg} too parking spot {newPSpace}\nPress any key to continue...");
