@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 //TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
-//TODO  
+//TODO  fixa serach, om man söker efter en car i en mc kommer inget felmeddelande
 //TODO  
 //TODO  
 //TODO  fixa search funktionen
@@ -246,7 +246,6 @@ namespace PragueParking
         public static void SeeParkedVehicles()
         {
 
-
             const int cols = 6;
             int n = 1;
 
@@ -261,12 +260,14 @@ namespace PragueParking
                 }
                 if (parkingList[i] == null)
                 {
-                    Console.Write(  i + 1 + ": Empty \t\t");
+                    
+                    Console.Write(i + 1 + ": Empty \t");
                     n++;
                 }
                 else
                 {
-                    Console.Write( i + 1 + ": " + parkingList[i] + "\t");
+                   
+                    Console.Write(i + 1 + ": " + parkingList[i] + "\t");
                     n++;
                 }
 
@@ -559,7 +560,6 @@ namespace PragueParking
                             }
                         }
                     }
-
                 }
                 else
                 {
