@@ -261,14 +261,12 @@ namespace PragueParking
                 }
                 if (parkingList[i] == null)
                 {
-                    Console.Write("\t" + i + 1 + ": Empty \t");
-                    Console.Write(i + 1 + ": Empty \t\t");
+                    Console.Write(  i + 1 + ": Empty \t\t");
                     n++;
                 }
                 else
                 {
-                    Console.Write("\t" + i + 1 + ": " + parkingList[i] + "\t");
-                    Console.Write(i + 1 + ": " + parkingList[i] + "\t");
+                    Console.Write( i + 1 + ": " + parkingList[i] + "\t");
                     n++;
                 }
 
