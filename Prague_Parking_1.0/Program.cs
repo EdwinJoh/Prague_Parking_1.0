@@ -494,11 +494,9 @@ namespace PragueParking
                         {
 
                             string temp;
-                            string seperator = "/MC";
-                            temp = string.Join(seperator, parkingList[i], userReg);
+                            string seperator = "/MC#";
+                            temp = string.Join(seperator, parkingList[newPSpace-1], userReg);
                             parkingList[newPSpace - 1] = temp;
-
-                            //parkingList[newPSpace - 1] = "MC#" + userReg;
                             parkingList[i] = null;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
@@ -578,16 +576,17 @@ namespace PragueParking
                     count++;
                 }
             }
-            DateTime.Today();
-            var date1 = new DateTime(x, y, z, 0, 0, 0);
-            Console.WriteLine(date1.ToString());
-            DateTime controllTime = new DateTime();
+            //    DateTime.Today();
+            //    var date1 = new DateTime(x, y, z, 0, 0, 0);
+            //    Console.WriteLine(date1.ToString());
+            //    DateTime controllTime = new DateTime();
 
 
 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            mainMenu();
+            //    Console.WriteLine("Press any key to continue...");
+            //    Console.ReadKey();
+            //    mainMenu();
+            //}
         }
     }
 }
