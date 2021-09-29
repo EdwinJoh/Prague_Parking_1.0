@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Linq;
-//TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
-//TODO  fixa serach, om man söker efter en car i en mc kommer inget felmeddelande
-//TODO  
-//TODO  
-//TODO  fixa search funktionen
-//TODO
+
 
 namespace PragueParking
 {
     class Program
     {
-        public static string[] parkingList = new string[10]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
-        public static string[] ticketList = new string[200];
+        public static string[] parkingList = new string[100]; 
 
         static void Main(string[] args)
         {
@@ -50,7 +44,6 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -122,8 +115,7 @@ namespace PragueParking
                         recipt = $"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n";
                         Console.WriteLine("{0}\nPress any key to continue..", recipt);
                         Console.ReadKey();
-                        spotRecipt = "CAR#" + carReg;
-                        ticketList[i] = "CAR#" + carReg + " " + now;
+                        spotRecipt = "CAR#" + carReg; 
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         mainMenu();
@@ -206,7 +198,6 @@ namespace PragueParking
                         Console.WriteLine("{0} \nPress any key to continue...", recipt);
                         Console.ReadKey();
                         spotRecipt = "MC#" + mcReg;
-                        ticketList[i] = "MC#" + mcReg + " " + now;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         break;
@@ -480,7 +471,7 @@ namespace PragueParking
                             temp = string.Join(seperator, parkingList[newPSpace - 1], userReg);
                             parkingList[newPSpace - 1] = temp;
                             parkingList[i] = null;
-                            ticketList[i] = "MC#" + userReg + now;
+                           
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine($"Moved vehicle {userReg} too parking spot {newPSpace}\nPress any key to continue...");
