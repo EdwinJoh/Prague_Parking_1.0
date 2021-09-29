@@ -560,10 +560,14 @@ namespace PragueParking
         }
         public static void Ticket()
         {
+            int count =1;
             foreach (var ticket in TicketList)
             {
-                Console.WriteLine(ticket);
+                Console.WriteLine("{0} {1}",count,ticket);
+                count++;
+                Console.ReadKey();
             }
+            mainMenu();
 
         }
     }
