@@ -54,7 +54,7 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-                   
+
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -358,7 +358,7 @@ namespace PragueParking
             }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Vehicle {0} is not parked here. Please try again");
+            Console.WriteLine("Vehicle {0} is not parked here. Please try again", userReg);
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             mainMenu();
@@ -552,25 +552,25 @@ namespace PragueParking
                                         mainMenu();
                                         break;
                                     }
-                                    mainMenu();
+
                                 }
                             }
                         }
                     }
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("vehicle is not parked here\nPress any key to continue...");
-                    Console.ReadKey();
-                    break;
-                }
             }
-            mainMenu();
 
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("vehicle is not parked here\nPress any key to continue...");
+            Console.ReadKey();
+
+
+
+            mainMenu();
         }
 
-    
+
     }
 }
 
