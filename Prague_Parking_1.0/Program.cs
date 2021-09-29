@@ -352,7 +352,7 @@ namespace PragueParking
                             Console.WriteLine("Removing Car {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
-                            Console.Clear()
+                            Console.Clear();
                             mainMenu();
                             break;
                         }
