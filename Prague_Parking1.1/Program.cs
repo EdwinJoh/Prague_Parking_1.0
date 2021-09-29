@@ -7,7 +7,7 @@ namespace PragueParking
     class Program
     {
         public static string[] parkingList = new string[100];
-                public static string[] ticketList = new string[200];
+        public static string[] TicketList = new string[200];
 
         static void Main(string[] args)
         {
@@ -25,7 +25,8 @@ namespace PragueParking
                 "[2] See parked vehicles\n" +
                 "[3] Move ParkSpace\n" +
                 "[4] Remove vehicle\n" +
-                "[5] Search for vehicle\n" +
+                "[5] Search for vehicle\n " +
+                "[6] Tickets" +
                 "[9] Quit Program\n");
 
 
@@ -49,7 +50,9 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-
+                    case 6:
+                        Ticket();
+                        break;
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -59,8 +62,6 @@ namespace PragueParking
                         mainMenu();
                         break;
                 }
-
-
             }
             catch (Exception e)
             {
@@ -91,7 +92,6 @@ namespace PragueParking
             {
                 Console.Clear();
                 mainMenu();
-
             }
             else
             {
@@ -126,7 +126,7 @@ namespace PragueParking
                         Console.WriteLine("{0}\nPress any key to continue..", recipt);
                         Console.ReadKey();
                         spotRecipt = "CAR#" + carReg;
-                        ticketList[i] = "CAR#" + carReg + " " + now;
+                        TicketList[i] = "CAR#" + carReg + " " + now;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         mainMenu();
@@ -212,7 +212,7 @@ namespace PragueParking
                         Console.WriteLine("{0} \nPress any key to continue...", recipt);
                         Console.ReadKey();
                         spotRecipt = "MC#" + mcReg;
-                        ticketList[i] = "MC#" + mcReg + " " + now;
+                        TicketList[i] = "MC#" + mcReg + " " + now;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         break;
@@ -466,12 +466,13 @@ namespace PragueParking
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...",userReg);
+            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...", userReg);
             Console.ReadKey();
 
             mainMenu();
         }
         public static void MoveMC()
+
         {
 
             DateTime now = DateTime.Now;
@@ -499,7 +500,7 @@ namespace PragueParking
                             temp = string.Join(seperator, parkingList[newPSpace - 1], userReg);
                             parkingList[newPSpace - 1] = temp;
                             parkingList[i] = null;
-                            ticketList[i] = "MC#" + userReg + now;
+                            TicketList[i] = "MC#" + userReg + now;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine($"Moved vehicle {userReg} too parking spot {newPSpace}\nPress any key to continue...");
@@ -552,15 +553,22 @@ namespace PragueParking
                 }
             }
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("vehicle {0} is not parked here\nPress any key to continue...",userReg);
+            Console.WriteLine("vehicle {0} is not parked here\nPress any key to continue...", userReg);
             Console.ReadKey();
             Console.Clear();
             mainMenu();
         }
+        public static void Ticket()
+        {
+            foreach (var ticket in TicketList)
+            {
+                Console.WriteLine(ticket);
+            }
+
+        }
     }
+
 }
-
-
 
 
 
