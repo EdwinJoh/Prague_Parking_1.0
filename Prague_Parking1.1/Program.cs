@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Linq;
-//TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
-//TODO  fixa serach, om man söker efter en car i en mc kommer inget felmeddelande
-//TODO  
-//TODO  
-//TODO  fixa search funktionen
-//TODO
+
 
 namespace PragueParking
 {
     class Program
     {
-        public static string[] parkingList = new string[10]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
-        public static string[] ticketList = new string[200];
+        public static string[] parkingList = new string[100];
+                public static string[] ticketList = new string[200];
 
         static void Main(string[] args)
         {
