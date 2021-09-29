@@ -6,6 +6,7 @@ namespace PragueParking
 {
     class Program
     {
+        
         public static string[] parkingList = new string[100]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
         public static string[] ticketList = new string[200];
 
