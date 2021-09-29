@@ -417,7 +417,7 @@ namespace PragueParking
                     {
                         Console.WriteLine("This parking spot is allocated, try another parking space");
                         Console.ReadKey();
-                        MoveCar();
+                        mainMenu();
                     }
 
                 }
