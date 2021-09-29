@@ -445,13 +445,20 @@ namespace PragueParking
                 {
                     continue;
                 }
-                if (parkingList[i] != null)
+                if (parkingList[i] != null )
+            
                 {
                     if (parkingList[i] == "MC#" + userReg)
                     {
                         Console.Write("Enter new parkings space: ");
                         int newPSpace = int.Parse(Console.ReadLine());
-                        if (parkingList[newPSpace - 1] == null || parkingList[i].Contains("MC#"))
+                        if (parkingList[newPSpace-1].Contains("CAR#"))
+                        {
+                        Console.WriteLine("There is not enougth room in this parking space, A Car is parked here. \nPress a key to try another parking space.");
+                        Console.ReadKey();
+                        MoveMC();
+                        }
+                        if (parkingList[newPSpace - 1] == null  || parkingList[i].Contains("MC#") )
                         {
                             string temp;
                             string seperator = "/MC#";
