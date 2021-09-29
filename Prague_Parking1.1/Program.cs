@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Linq;
-
+//TODO  bilar som är parkerade efter 0000 skall få böter och tas bort
+//TODO  fixa serach, om man söker efter en car i en mc kommer inget felmeddelande
+//TODO  
+//TODO  
+//TODO  fixa search funktionen
+//TODO
 
 namespace PragueParking
 {
     class Program
     {
-        
-        public static string[] parkingList = new string[100]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
+        public static string[] parkingList = new string[10]; // sätter arrayen till 200 för man kan parkera fler mc en bilar
         public static string[] ticketList = new string[200];
 
         static void Main(string[] args)
@@ -27,7 +31,6 @@ namespace PragueParking
                 "[3] Move ParkSpace\n" +
                 "[4] Remove vehicle\n" +
                 "[5] Search for vehicle\n" +
-                "[6] ticket\n" +
                 "[9] Quit Program\n");
 
 
@@ -51,9 +54,7 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-                    case 6:
-                        ticket();
-                        break;
+
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -155,22 +156,16 @@ namespace PragueParking
                     Console.Clear();
                     mainMenu();
                 }
-
             }
-
             mainMenu();
         }
         public static void McPark()
         {
-
             string mcReg = "";
             DateTime now = DateTime.Now;
             int empty = EmptySpace();
             string recipt = "";
             string spotRecipt = "";
-
-
-
             Console.Clear();
             Console.WriteLine("\t*** Park a MC ***\n");
             Console.Write("Enter your License plate number:");
@@ -338,6 +333,8 @@ namespace PragueParking
                             Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
+                            Console.Clear();
+                            mainMenu();
                             break;
                         }
                         else if (parkingSpot[1] == "MC#" + userReg)
@@ -349,6 +346,8 @@ namespace PragueParking
                             Console.WriteLine("Removing Car {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
+                            Console.Clear();
+                            mainMenu();
                             break;
                         }
                     }
@@ -357,7 +356,7 @@ namespace PragueParking
             }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Vehicle {0} is not parked here. Please try again");
+            Console.WriteLine("Vehicle {0} is not parked here. Please try again", userReg);
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             mainMenu();
@@ -393,9 +392,6 @@ namespace PragueParking
             mainMenu();
 
 
-
-
-            mainMenu();
 
         }
         public static int EmptySpace()
@@ -440,6 +436,10 @@ namespace PragueParking
 
             for (int i = 0; i < parkingList.Length; i++)
             {
+                if (parkingList[i] == null)
+                {
+                    continue;
+                }
                 if (parkingList[i].Contains("CAR#" + userReg))
                 {
 
@@ -451,31 +451,29 @@ namespace PragueParking
                         {
                             parkingList[newPSpace - 1] = "CAR#" + userReg;
                             parkingList[i] = null;
-                            Console.WriteLine($"Moved vehicle {userReg} too parking spot {newPSpace}");
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"Moved vehicle {userReg} too parking spot {newPSpace}\nPress any key to continue...");
+                            Console.ReadKey();
                             mainMenu();
                             break;
                         }
                     }
-                    else if (parkingList[i] == null)
-                    {
-                        continue;
-                    }
                     else if (parkingList[i] != null)
                     {
-
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("This parking spot is already taken. Try another one\nPress any key to go back to the menu...");
                         Console.ReadKey();
                         Console.Clear();
                     }
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Vehicle is not parked here\nPress any key to continue...");
-                    Console.ReadKey();
-                    break;
-                }
+
             }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...",userReg);
+            Console.ReadKey();
+
             mainMenu();
         }
         public static void MoveMC()
@@ -551,50 +549,18 @@ namespace PragueParking
                                         mainMenu();
                                         break;
                                     }
-                                    mainMenu();
+
                                 }
                             }
                         }
                     }
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("vehicle is not parked here\nPress any key to continue...");
-                    Console.ReadKey();
-                    break;
-                }
             }
-            mainMenu();
-
-        }
-        static void ticket()// fixa checkout
-        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("vehicle {0} is not parked here\nPress any key to continue...",userReg);
+            Console.ReadKey();
             Console.Clear();
-            int count = 1;
-            foreach (var ticket in ticketList)
-            {
-                if (ticket == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    Console.WriteLine("{0}: {1}", count, ticket);
-                    count++;
-                }
-            }
-            //    DateTime.Today();
-            //    var date1 = new DateTime(x, y, z, 0, 0, 0);
-            //    Console.WriteLine(date1.ToString());
-            //    DateTime controllTime = new DateTime();
-
-
-
-            //    Console.WriteLine("Press any key to continue...");
-            //    Console.ReadKey();
-            //    mainMenu();
-            //}
+            mainMenu();
         }
     }
 }
