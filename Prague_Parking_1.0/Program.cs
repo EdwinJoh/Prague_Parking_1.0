@@ -31,7 +31,6 @@ namespace PragueParking
                 "[3] Move ParkSpace\n" +
                 "[4] Remove vehicle\n" +
                 "[5] Search for vehicle\n" +
-                "[6] ticket\n" +
                 "[9] Quit Program\n");
 
 
@@ -55,9 +54,7 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-                    case 6:
-                        ticket();
-                        break;
+                   
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -260,13 +257,13 @@ namespace PragueParking
                 }
                 if (parkingList[i] == null)
                 {
-                    
+
                     Console.Write(i + 1 + ": Empty \t");
                     n++;
                 }
                 else
                 {
-                   
+
                     Console.Write(i + 1 + ": " + parkingList[i] + "\t");
                     n++;
                 }
@@ -572,34 +569,8 @@ namespace PragueParking
             mainMenu();
 
         }
-        static void ticket()// fixa checkout
-        {
-            Console.Clear();
-            int count = 1;
-            foreach (var ticket in ticketList)
-            {
-                if (ticket == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    Console.WriteLine("{0}: {1}", count, ticket);
-                    count++;
-                }
-            }
-            //    DateTime.Today();
-            //    var date1 = new DateTime(x, y, z, 0, 0, 0);
-            //    Console.WriteLine(date1.ToString());
-            //    DateTime controllTime = new DateTime();
 
-
-
-            //    Console.WriteLine("Press any key to continue...");
-            //    Console.ReadKey();
-            //    mainMenu();
-            //}
-        }
+    
     }
 }
 
