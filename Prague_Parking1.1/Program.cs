@@ -18,6 +18,8 @@ namespace PragueParking
         {
             try
             {
+                // DateTime now = DateTime.Now;
+                // DateTime tomorrow = now.AddDays(1);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Prgue Parking\n" +
                  "Enter choise below\n" +
@@ -26,6 +28,7 @@ namespace PragueParking
                 "[3] Move ParkSpace\n" +
                 "[4] Remove vehicle\n" +
                 "[5] Search for vehicle\n" +
+                "[6] Tickets\n" +
                 "[9] Quit Program\n");
 
                 int menuInput = int.Parse(Console.ReadLine());
@@ -45,6 +48,9 @@ namespace PragueParking
                         break;
                     case 5:
                         Search();
+                        break;
+                    case 6:
+                        Ticket();
                         break;
                     case 9:
                         Console.WriteLine("Program quitting...");
@@ -124,7 +130,7 @@ namespace PragueParking
                         Console.ReadKey();
                         spotRecipt = "CAR#" + carReg;
                         SpotAllocation(empty, spotRecipt);
-                       
+                        Tickets[i] = carReg + " Parked: " + now;
                         Console.Clear();
                         mainMenu();
                     }
@@ -174,6 +180,7 @@ namespace PragueParking
                     Console.WriteLine("This registration number is already parked");
                     Console.WriteLine("Press any key for go back to the vehicle menu:");
                     Console.ReadKey();
+                    Console.Clear();
                     mainMenu();
                     break;
                 }
@@ -197,6 +204,7 @@ namespace PragueParking
                             Console.ForegroundColor = ConsoleColor.Green;
                             recipt = $"Parking vehicle {mcReg} at parking space {i + 1 }\nParking started at {now}";
                             Console.WriteLine("{0}\nPRess any key to continue...", recipt);
+                            Tickets[i] = mcReg + " Parked: " + now;
                             Console.ReadKey();
                             Console.Clear();
                             break;
@@ -210,6 +218,7 @@ namespace PragueParking
                         Console.ReadKey();
                         spotRecipt = "MC#" + mcReg;
                         SpotAllocation(empty, spotRecipt);
+                        Tickets[i] = mcReg + " Parked: " + now;
                         Console.Clear();
                         break;
                     }
@@ -454,10 +463,7 @@ namespace PragueParking
 
             if (SearchReg(userReg))
             {
-                if (userReg == "CAR#" + userReg)
-                {
-
-
+                
                     int index = FindIndex(userReg);
                     for (int i = 0; i < parkingList.Length; i++)
                     {
@@ -521,13 +527,6 @@ namespace PragueParking
                         }
 
                     }
-                }
-                else
-                {
-                    Console.WriteLine("This is an mc");
-                    Console.ReadKey();
-                    mainMenu();
-                }
             }
         }
         public static bool SearchReg(string userInput)
@@ -557,7 +556,7 @@ namespace PragueParking
         }
         public static void Ticket()
         {
-            int count =1;
+            int count = 1;
             foreach (var ticket in Tickets)
             {
                 if (ticket == null)
@@ -566,9 +565,12 @@ namespace PragueParking
                 }
                 else
                 {
-                Console.WriteLine("{0}: {1}",count,ticket);
+                    Console.WriteLine("{0}: {1}", count, ticket);
                 }
             }
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+            mainMenu();
         }
     }
 }
