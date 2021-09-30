@@ -88,8 +88,10 @@ namespace PragueParking
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wrong input, try an number from 1 - 3. press any key to go back...");
                 Console.ReadKey();
+                Console.Clear();
                 VehicleType();
             }
         }
@@ -297,6 +299,7 @@ namespace PragueParking
                     Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
+                    Console.Clear();
                     MainMenu();
                     break;
                 }
@@ -383,6 +386,7 @@ namespace PragueParking
                 }
                 else if (counter == 100)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Unfortunatly there is no parkingspots available.\n press any key to continue...");
                     Console.Read();
                     Console.Clear();
@@ -417,6 +421,7 @@ namespace PragueParking
                         int newSpot = int.Parse(Console.ReadLine());
                         if (ParkingList[newSpot - 1] == ParkingList[i])
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Your vehicle is already parked here.\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
@@ -437,14 +442,17 @@ namespace PragueParking
                         }
                         else if (ParkingList[newSpot - 1].Contains("MC#") || ParkingList[newSpot - 1].Contains("CAR#"))
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("This parking spot is allocated, try another parking space");
                             Console.ReadKey();
+                            Console.Clear();
                             MainMenu();
                         }
                     }
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("This license plate number is an MC. You are trying to move a car.\nPress any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
@@ -453,8 +461,10 @@ namespace PragueParking
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Vehicle {0} is not parked here..\nPress any key to continue...", userReg);
                 Console.ReadKey();
+                Console.Clear();
                 MainMenu();
             }
 
@@ -485,8 +495,10 @@ namespace PragueParking
                                 {
                                     ParkingList[newSpot - 1] = vehicles[0];
                                     ParkingList[index] = vehicles[1];
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                     Console.ReadKey();
+                                    Console.Clear();
                                     MainMenu();
                                     break;
                                 }
@@ -494,8 +506,10 @@ namespace PragueParking
                                 {
                                     ParkingList[newSpot - 1] = vehicles[1];
                                     ParkingList[index] = vehicles[0];
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                     Console.ReadKey();
+                                    Console.Clear();
                                     MainMenu();
                                     break;
 
@@ -506,19 +520,24 @@ namespace PragueParking
                         {
                             ParkingList[newSpot - 1] = "MC#" + userReg;
                             ParkingList[index] = null;
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                             Console.ReadKey();
+                            Console.Clear();
                             MainMenu();
                             break;
                         }
                         else if (ParkingList[newSpot - 1].Contains("CAR#"))
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("This spot is allocated to a car, please choose another spot\nPress any key to continue back...");
                             Console.ReadKey();
+                            Console.Clear();
                             MoveMC();
                         }
                         else if (ParkingList[newSpot - 1] == ParkingList[i])
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Your vehicle is already parked here.\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
@@ -544,6 +563,7 @@ namespace PragueParking
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("This license plate number is for car. You are trying to move a Mc.\nPress any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
