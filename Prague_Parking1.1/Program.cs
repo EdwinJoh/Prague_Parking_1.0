@@ -7,6 +7,7 @@ namespace PragueParking
     class Program
     {
         public static string[] parkingList = new string[100];
+        public static string[] Tickets = new string[200];
 
 
         static void Main(string[] args)
@@ -123,6 +124,7 @@ namespace PragueParking
                         Console.ReadKey();
                         spotRecipt = "CAR#" + carReg;
                         SpotAllocation(empty, spotRecipt);
+                       
                         Console.Clear();
                         mainMenu();
                     }
@@ -519,7 +521,8 @@ namespace PragueParking
                         }
 
                     }
-                }else
+                }
+                else
                 {
                     Console.WriteLine("This is an mc");
                     Console.ReadKey();
@@ -551,6 +554,21 @@ namespace PragueParking
                 }
             }
             return 0;
+        }
+        public static void Ticket()
+        {
+            int count =1;
+            foreach (var ticket in Tickets)
+            {
+                if (ticket == null)
+                {
+                    continue;
+                }
+                else
+                {
+                Console.WriteLine("{0}: {1}",count,ticket);
+                }
+            }
         }
     }
 }
