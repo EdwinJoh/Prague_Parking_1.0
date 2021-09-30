@@ -24,7 +24,7 @@ namespace PragueParking
                 "[2] See parked vehicles\n" +
                 "[3] Move Vehicle\n" +
                 "[4] Remove vehicle\n" +
-                "[5] Search for vehicle\n"+
+                "[5] Search for vehicle\n" +
                 "[6] TIckets\n" +
                 "[9] Quit Program\n");
 
@@ -46,7 +46,7 @@ namespace PragueParking
                     case 5:
                         Search();
                         break;
-                        case 6:
+                    case 6:
                         Ticket();
                         break;
                     case 9:
@@ -127,11 +127,10 @@ namespace PragueParking
                         Console.WriteLine($"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n");
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
-                        Tickets[i] = carReg + "Parked " + now;
                         spotRecipt = "CAR#" + carReg;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
-                        MainMenu();
+                        break;
                     }
                     else if (ParkingList[i] != null)
                     {
@@ -155,8 +154,16 @@ namespace PragueParking
                 Console.Clear();
                 MainMenu();
             }
+            for (int i = 0; i < Tickets.Length; i++)
+            {
+                if (Tickets[i] == null)
+                {
+                    Tickets[i] = carReg + " " + now;
+                    break;
+                }
 
-
+            }
+            MainMenu();
         }
         public static void McPark()
         {
@@ -227,6 +234,14 @@ namespace PragueParking
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.White;
                 McPark();
+            }
+            for (int i = 0; i < Tickets.Length; i++)
+            {
+                if (Tickets[i] == null)
+                {
+                    Tickets[i] = mcReg + " " + now;
+                    break;
+                }
             }
             MainMenu();
         }
@@ -617,6 +632,10 @@ namespace PragueParking
                     count++;
                 }
             }
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            MainMenu();
         }
     }
 }
