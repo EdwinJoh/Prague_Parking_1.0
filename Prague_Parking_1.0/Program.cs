@@ -458,19 +458,31 @@ namespace PragueParking
                             {
                                 parkingList[newSpot - 1] = vehicles[0];
                                 parkingList[index] = vehicles[1];
-                                Console.WriteLine("Moving vehicles {0} to parking spot {0}\nPress any key to continue...", userReg, newSpot);
+                                Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                 Console.ReadKey();
+                                mainMenu();
                                 break;
                             }
                             if (vehicles[1] == "MC#" + userReg)
                             {
                                 parkingList[newSpot - 1] = vehicles[1];
                                 parkingList[index] = vehicles[0];
-                                Console.WriteLine("Moving vehicles {0} to parking spot {0}\nPress any key to continue...", userReg, newSpot);
+                                Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                 Console.ReadKey();
+                                mainMenu();
                                 break;
+
                             }
                         }
+                    }
+                    else if (parkingList[newSpot - 1] == null)
+                    {
+                        parkingList[newSpot - 1] = "MC#" + userReg;
+                        parkingList[index] = null;
+                        Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
+                        Console.ReadKey();
+                        mainMenu();
+                        break;
                     }
                     else if (parkingList[newSpot - 1].Contains("CAR#"))
                     {
@@ -478,15 +490,22 @@ namespace PragueParking
                         Console.ReadKey();
                         MoveMC();
                     }
-                    else if (parkingList[newSpot - 1] == null)
+                    else if (parkingList[newSpot - 1].Contains("MC#"))
                     {
-                        parkingList[newSpot - 1] = "MC" + userReg;
-                        parkingList[index] = null;
-                        Console.WriteLine("Moving vehicles {0} to parking spot {0}\nPress any key to continue...", userReg, newSpot);
+                        string temp;
+                        string seperator = "/MC#";
+                        temp = string.Join(seperator, parkingList[newSpot - 1], userReg);
+                        parkingList[newSpot - 1] = temp;
+                        parkingList[i] = null;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Clear();
+                        Console.WriteLine($"Moved vehicle {userReg} too parking spot {newSpot}\nPress any key to continue...");
                         Console.ReadKey();
+                        Console.Clear();
+                        mainMenu();
                         break;
                     }
-//need to move another mc 
+                    //need to move another mc 
 
                 }
 
