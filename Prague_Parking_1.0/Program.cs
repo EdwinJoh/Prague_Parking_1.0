@@ -95,53 +95,61 @@ namespace PragueParking
         }
         public static void ParkCar()
         {
-            string carReg = "";
             DateTime now = DateTime.Now;
             int empty = EmptySpace();
-            string recipt = "";
             string spotRecipt = "";
-
             Console.Clear();
             Console.WriteLine("\t*** Park a Car ***\n");
             Console.Write("Enter your License plate number:");
-            carReg = Console.ReadLine().ToUpper();
-            Console.Clear();
-            for (int i = 0; i < parkingList.Length; i++)
+            string carReg = Console.ReadLine().ToUpper();
+            if (SearchReg(carReg))
             {
-                if (parkingList[i] == null)
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"Vehicle {carReg} is already parked here try again...\nPress any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                mainMenu();
+            }
+
+            else if (carReg.Length >= 4 && carReg.Length <= 10)
+            {
+                for (int i = 0; i < parkingList.Length; i++)
                 {
-                    if (carReg.Length <= 10 && carReg.Length >= 4)
+                    if (parkingList[i] == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        recipt = $"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n";
-                        Console.WriteLine("{0}\nPress any key to continue..", recipt);
+                        Console.WriteLine($"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n");
+                        Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
                         spotRecipt = "CAR#" + carReg;
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         mainMenu();
-                        break;
+                    }
+                    else if (parkingList[i] != null)
+                    {
+                        continue;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("The registration number is to long or to short. Max length is 10 letters and a min of 4 letters.\nPress any key to try again...");
+                        Console.WriteLine("The parkinglot is full Please come back later.\nPress any key to continue...");
                         Console.ReadKey();
-                        Console.ForegroundColor = ConsoleColor.White;
-                        ParkCar();
+                        Console.Clear();
+                        mainMenu();
                     }
                 }
-                else if (parkingList[i].Contains(carReg + "MC#") || parkingList[i].Contains("CAR#" + carReg))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("This License plate number is already parked here. Try a diffrent one.");
-                    Console.WriteLine("Press any key fo go back to the vehicle menu:");
-                    Console.ReadKey();
-                    Console.Clear();
-                    mainMenu();
-                }
             }
-            mainMenu();
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The Entered license plate number is to short or to long.\nPress any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                mainMenu();
+            }
+
+
         }
         public static void McPark()
         {
