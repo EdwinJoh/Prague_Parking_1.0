@@ -319,7 +319,7 @@ namespace PragueParking
             Console.Write("Enter license plate number:");
             string userReg = Console.ReadLine().ToUpper();
             DateTime now = DateTime.Now;
-            
+
 
             for (int i = 0; i < ParkingList.Length; i++)
             {
@@ -331,14 +331,14 @@ namespace PragueParking
                 {
                     ParkingList[i] = null;
                     int ticketIndex = FindTicket(userReg);
-                    
-                   
-                        string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
-                        DateTime checkInDate = DateTime.Parse(ticketDate);
-                        TimeSpan interval = now - checkInDate;
-                        TicketList[ticketIndex] = null;
-                        
-                    
+
+
+                    string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
+                    DateTime checkInDate = DateTime.Parse(ticketDate);
+                    TimeSpan interval = now - checkInDate;
+                    TicketList[ticketIndex] = null;
+
+
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Removing vehicle {userReg}. Thanks for using us and welcome back!\n ");
@@ -357,11 +357,18 @@ namespace PragueParking
                     {
                         if (parkingSpot[0] == "MC#" + userReg)
                         {
+                            int ticketIndex = FindTicket(userReg);
+                            string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
+                            DateTime checkInDate = DateTime.Parse(ticketDate);
+                            TimeSpan interval = now - checkInDate;
+                            TicketList[ticketIndex] = null;
+
                             parkingSpot[0] = null;
                             ParkingList[i] = parkingSpot[1];
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
+                             Console.WriteLine("{0} has been parked for {1}",userReg,interval);
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
@@ -370,11 +377,17 @@ namespace PragueParking
                         }
                         else if (parkingSpot[1] == "MC#" + userReg)
                         {
+                            int ticketIndex = FindTicket(userReg);
+                            string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
+                            DateTime checkInDate = DateTime.Parse(ticketDate);
+                            TimeSpan interval = now - checkInDate;
+
                             parkingSpot[1] = null;
                             ParkingList[i] = parkingSpot[0];
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine("Removing Car {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
+                            Console.WriteLine($"{userReg} has been parked for {interval}");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
