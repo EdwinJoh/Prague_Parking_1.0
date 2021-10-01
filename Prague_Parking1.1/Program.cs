@@ -266,6 +266,7 @@ namespace PragueParking
             Console.Clear();
             for (int i = 0; i < ParkingList.Length; i++)
             {
+                Console.ResetColor();
                 if (n >= cols && n % cols == 0)
                 {
                     Console.WriteLine();
@@ -273,11 +274,29 @@ namespace PragueParking
                 }
                 if (ParkingList[i] == null)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write(i + 1 + ": Empty \t");
                     n++;
+
                 }
-                else
+                else if (ParkingList[i].Contains("CAR#"))
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
+                    n++;
+                }
+                else if (ParkingList[i].Contains("MC#") && ParkingList[i].Length <= 10)
+                {
+                    {
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
+                        n++;
+                    }
+                }
+                else if (ParkingList[i].Contains("/"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
                     n++;
                 }
@@ -368,7 +387,7 @@ namespace PragueParking
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
                             Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
-                             Console.WriteLine("{0} has been parked for {1}",userReg,interval);
+                            Console.WriteLine("{0} has been parked for {1}", userReg, interval);
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
