@@ -17,6 +17,19 @@ namespace PragueParking
         {
             try
             {
+                TimeSpan start = TimeSpan.Parse("23:58"); 
+                TimeSpan end = TimeSpan.Parse("23:59");   
+                TimeSpan now = DateTime.Now.TimeOfDay;
+                if (start <= end)
+                {
+                    if (now >= start && now <= end)
+                    {
+                        ParkingList = null;
+                        Console.WriteLine("The time is now 00.00, all the vehicles that are parked here now is been moved to a diffrent parkinglot\n"+
+                        "Parked vehicles is fined xx SEK.");
+                    }
+                }
+
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Prgue Parking\n" +
                  "Enter choise below\n" +
@@ -636,6 +649,10 @@ namespace PragueParking
             Console.ReadKey();
             Console.Clear();
             MainMenu();
+
+
+
+
         }
     }
 }
