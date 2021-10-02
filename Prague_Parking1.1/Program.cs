@@ -26,7 +26,7 @@ namespace PragueParking
 
                     ParkingList = null;
                     Console.WriteLine("The time is now 23:59 all the vehicles that are parked here now is been moved to a diffrent parkinglot\n" +
-                    "Parked vehicles is fined xx SEK.\n");
+                    "Parked vehicles is fined 800< SEK.\n");
                     Console.Write("The vehicles that´s going to get moved is:");
                     foreach (var vehicles in list)
                     {
@@ -41,7 +41,7 @@ namespace PragueParking
                         }
 
                     }
-                    MainMenu();
+                    // kolla igeom koden över den fungerar men inte optimal
                 }
 
 
@@ -275,9 +275,10 @@ namespace PragueParking
         }
         public static void SeeParkedVehicles()
         {
+            // Console.Clear();
+            Console.Write($"*** Parkinglot*** \n");
             const int cols = 6;
             int n = 1;
-            Console.Clear();
             for (int i = 0; i < ParkingList.Length; i++)
             {
                 Console.ResetColor();
@@ -317,7 +318,7 @@ namespace PragueParking
             }
             Console.Write("\nPress any key to retrun to the menu...");
             Console.ReadKey();
-            Console.Clear();
+            // Console.Clear();
             MainMenu();
         }
         public static void Move()
