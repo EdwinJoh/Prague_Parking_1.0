@@ -489,7 +489,7 @@ namespace PragueParking
                                     ParkingList[newSpot - 1] = vehicles[0];
                                     ParkingList[index] = vehicles[1];
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Moving vehicle {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
+                                    Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                     Console.ReadKey();
                                     Console.Clear();
                                     MainMenu();
@@ -500,7 +500,7 @@ namespace PragueParking
                                     ParkingList[newSpot - 1] = vehicles[1];
                                     ParkingList[index] = vehicles[0];
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Moving vehicle {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
+                                    Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
                                     Console.ReadKey();
                                     Console.Clear();
                                     MainMenu();
@@ -526,7 +526,8 @@ namespace PragueParking
                             Console.WriteLine("This spot is allocated to a car, please choose another spot\nPress any key to continue back...");
                             Console.ReadKey();
                             Console.Clear();
-                            MainMenu();
+                            Console.ResetColor();
+                            MoveMC();
                         }
                         else if (ParkingList[newSpot - 1] == ParkingList[i])
                         {
@@ -537,39 +538,8 @@ namespace PragueParking
                             MainMenu();
 
                         }
-                        else if (ParkingList[newSpot - 1].Contains("MC#"))
-                        {
-                            string temp;
-                            string seperator = "/MC#";
-                            temp = string.Join(seperator, ParkingList[newSpot - 1], userReg);
-                            ParkingList[newSpot - 1] = temp;
-                            ParkingList[i] = null;
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Clear();
-                            Console.WriteLine($"Moved vehicle {userReg} too parking spot {newSpot}\nPress any key to continue...");
-                            Console.ReadKey();
-                            Console.Clear();
-                            MainMenu();
-                            break;
-                        }
                     }
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("This license plate number is for car. You are trying to move a Mc.\nPress any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu();
-                }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Vehicle {0} is not parked here..\nPress any key to continue...", userReg);
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
             }
         }
         public static bool SearchReg(string userReg)
