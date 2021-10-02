@@ -41,7 +41,6 @@ namespace PragueParking
                         }
 
                     }
-                    // kolla igeom koden över den fungerar men inte optimal
                 }
 
 
@@ -275,8 +274,9 @@ namespace PragueParking
         }
         public static void SeeParkedVehicles()
         {
-            // Console.Clear();
-            Console.Write($"*** Parkinglot*** \n");
+            Console.Clear();
+
+            Console.Write(" *** Parkinglot***\n");
             const int cols = 6;
             int n = 1;
             for (int i = 0; i < ParkingList.Length; i++)
@@ -318,7 +318,7 @@ namespace PragueParking
             }
             Console.Write("\nPress any key to retrun to the menu...");
             Console.ReadKey();
-            // Console.Clear();
+            Console.Clear();
             MainMenu();
         }
         public static void Move()
@@ -376,7 +376,7 @@ namespace PragueParking
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Removing vehicle {userReg}. Thanks for using us and welcome back!\n ");
-                    Console.WriteLine($"{userReg} has been parked for {interval}");
+                    Console.WriteLine("{0} has been parked for {1:hh:mm:ss}",userReg, interval);
                     Console.WriteLine("\nPress any key to continue...");
 
                     Console.ReadKey();
@@ -703,7 +703,7 @@ namespace PragueParking
                 }
                 else
                 {
-                    Console.WriteLine("{0}:{1}", count, ticket);
+                    Console.WriteLine("{0},{1}", count, ticket);
                     count++;
                 }
             }
