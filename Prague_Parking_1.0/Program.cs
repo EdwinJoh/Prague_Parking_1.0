@@ -531,7 +531,7 @@ namespace PragueParking
                 {
                     if (ParkingList[index].Contains("/"))
                     {
-                        // om det står 2 mc på index måste vi splita .
+                       
                         string[] vehicles = ParkingList[index].Split("/");
                         foreach (var vehcile in vehicles)
                         {
