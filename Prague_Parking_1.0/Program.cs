@@ -462,7 +462,7 @@ namespace PragueParking
                 MainMenu();
             }
         }
-        public static void MoveMC()// behöver en join funktion för att lägga till mc som står själva
+        public static void MoveMC()
 
         {
             DateTime now = DateTime.Now;
@@ -538,78 +538,11 @@ namespace PragueParking
                 }
 
             }
+            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            MainMenu();
         }
-
-        #region hej
-        // if (ParkingList[index].Contains("MC#"))
-        // {
-        //     for (int i = 0; i < ParkingList.Length; i++)
-        //     {
-        //         Console.Write("Enter new parkingSpot:");
-        //         int newSpot = int.Parse(Console.ReadLine());
-        //         if (ParkingList[index].Contains("/"))
-        //         {
-        //             string[] vehicles = ParkingList[index].Split("/");
-        //             foreach (var vehicle in vehicles)
-        //             {
-        //                 if (vehicles[0] == "MC#" + userReg)
-        //                 {
-        //                     ParkingList[newSpot - 1] = vehicles[0];
-        //                     ParkingList[index] = vehicles[1];
-        //                     Console.ForegroundColor = ConsoleColor.Green;
-        //                     Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
-        //                     Console.ReadKey();
-        //                     Console.Clear();
-        //                     MainMenu();
-        //                     break;
-        //                 }
-        //                 if (vehicles[1] == "MC#" + userReg)
-        //                 {
-        //                     ParkingList[newSpot - 1] = vehicles[1];
-        //                     ParkingList[index] = vehicles[0];
-        //                     Console.ForegroundColor = ConsoleColor.Green;
-        //                     Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
-        //                     Console.ReadKey();
-        //                     Console.Clear();
-        //                     MainMenu();
-        //                     break;
-
-        //                 }
-        //             }
-        //         }
-        //         else if (ParkingList[newSpot - 1] == null)
-        //         {
-        //             ParkingList[newSpot - 1] = "MC#" + userReg;
-        //             ParkingList[index] = null;
-        //             Console.ForegroundColor = ConsoleColor.Green;
-        //             Console.WriteLine("Moving vehicles {0} to parking spot {1}\nPress any key to continue...", userReg, newSpot);
-        //             Console.ReadKey();
-        //             Console.Clear();
-        //             MainMenu();
-        //             break;
-        //         }
-        //         else if (ParkingList[newSpot - 1].Contains("CAR#"))
-        //         {
-        //             Console.ForegroundColor = ConsoleColor.Red;
-        //             Console.WriteLine("This spot is allocated to a car, please choose another spot\nPress any key to continue back...");
-        //             Console.ReadKey();
-        //             Console.Clear();
-        //             Console.ResetColor();
-        //             MoveMC();
-        //         }
-        //         else if (ParkingList[newSpot - 1] == ParkingList[i])
-        //         {
-        //             Console.ForegroundColor = ConsoleColor.Red;
-        //             Console.WriteLine("Your vehicle is already parked here.\nPress any key to continue...");
-        //             Console.ReadKey();
-        //             Console.Clear();
-        //             MainMenu();
-
-        //         }
-        #endregion
-
-
-
 
 
         public static bool SearchReg(string userReg)
