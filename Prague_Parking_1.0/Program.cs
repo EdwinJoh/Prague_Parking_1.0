@@ -106,12 +106,12 @@ namespace PragueParking
             if (SearchReg(carReg))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write($"Vehicle {carReg} is already parked here try again.\nPress any key to continue...");
+                Console.WriteLine("Vehicle {0} is already parked here.\nPress any key to continue...",carReg);
                 Console.ReadKey();
                 Console.Clear();
                 MainMenu();
             }
-            else if (carReg.Length >= 4 && carReg.Length <= 10)
+            if (carReg.Length >= 4 && carReg.Length <= 10)
             {
                 for (int i = 0; i < ParkingList.Length; i++)
                 {
@@ -140,6 +140,7 @@ namespace PragueParking
                     }
                 }
             }
+
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -538,13 +539,12 @@ namespace PragueParking
                 }
 
             }
-            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...",userReg);
             Console.ReadKey();
             Console.Clear();
             MainMenu();
         }
-
-
         public static bool SearchReg(string userReg)
         {
             userReg.ToUpper();
