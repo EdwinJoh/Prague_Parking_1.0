@@ -494,7 +494,7 @@ namespace PragueParking
             DateTime now = DateTime.Now;
             Console.Clear();
             Console.WriteLine("\t*** Moving MC ***\n");
-            Console.Write("Enter license plate plate number:");
+           Console.Write("Enter license plate plate number:");
             string userReg = Console.ReadLine().ToUpper();
 
             if (SearchReg(userReg))
