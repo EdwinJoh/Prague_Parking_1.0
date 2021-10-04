@@ -234,7 +234,7 @@ namespace PragueParking
                     MainMenu();
                 }
             }
-                    MainMenu();
+            MainMenu();
         }
         public static void SeeParkedVehicles()
         {
@@ -422,59 +422,39 @@ namespace PragueParking
             if (SearchReg(userReg))
             {
                 int index = FindIndex(userReg);
-                if (ParkingList[index].Contains("CAR#"))
-                {
-                    for (int i = 0; i < ParkingList.Length; i++)
-                    {
-                        Console.Write("Enter the spot you want to change to:");
-                        int newSpot = int.Parse(Console.ReadLine());
-                        if (ParkingList[newSpot - 1] == ParkingList[i])
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Your vehicle is already parked here.\nPress any key to continue...");
-                            Console.ReadKey();
-                            Console.Clear();
-                            MainMenu();
-                        }
-                        else if (ParkingList[newSpot - 1] == null)
-                        {
-                            ParkingList[newSpot - 1] = "CAR#" + userReg;
+                Console.WriteLine("Enter the spot you want to change to:");
+                int newSpot = int.Parse(Console.ReadLine());
 
-                            ParkingList[index] = null;
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Clear();
-                            Console.WriteLine($"Moved vehicle {userReg} too parking spot {newSpot}\nPress any key to continue...");
-                            Console.ReadKey();
-                            Console.Clear();
-                            MainMenu();
-                            break;
-                        }
-                        else if (ParkingList[newSpot - 1].Contains("MC#") || ParkingList[newSpot - 1].Contains("CAR#"))
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("This parking spot is allocated, try another parking space");
-                            Console.ReadKey();
-                            Console.Clear();
-                            MainMenu();
-                        }
-                    }
-                }
-                else
+                if (ParkingList[newSpot - 1] == null)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("This license plate number is an MC. You are trying to move a car.\nPress any key to continue...");
+                    ParkingList[newSpot - 1] = "CAR#" + userReg;
+                    ParkingList[index] = null;
+                    Console.WriteLine("Moveing vehicle {0} to new parking spot {1}",userReg,newSpot);
+                    Console.ReadKey();
+                    MainMenu();
+
+                }
+                else if (ParkingList[index] == ParkingList[newSpot - 1])
+                {
+                    Console.WriteLine("Your vehicle is already parked here\nPress any key to continue..");
                     Console.ReadKey();
                     Console.Clear();
                     MainMenu();
                 }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Vehicle {0} is not parked here..\nPress any key to continue...", userReg);
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+                else if (ParkingList[newSpot - 1].Contains("CAR#"))
+                {
+                    Console.WriteLine("There is not enought room. There is an Car parked here.\nPress any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu();
+                }
+                else if (ParkingList[newSpot - 1].Contains("MC#"))
+                {
+                    Console.WriteLine("There is not enought room. There is an MC parked here.\nPress any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu();
+                }
             }
         }
         public static void MoveMC()
@@ -496,6 +476,13 @@ namespace PragueParking
                 if (ParkingList[index] == ParkingList[newSpot - 1])
                 {
                     Console.WriteLine("Your vehicle is already parked here\nPress any key to continue..");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu();
+                }
+                else if (ParkingList[newSpot - 1].Contains("CAR#"))
+                {
+                    Console.WriteLine("There is not enought room. There is an Car parked here.\nPress any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
                     MainMenu();
