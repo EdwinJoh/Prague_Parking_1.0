@@ -106,7 +106,7 @@ namespace PragueParking
             if (SearchReg(carReg))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Vehicle {0} is already parked here.\nPress any key to continue...",carReg);
+                Console.WriteLine("Vehicle {0} is already parked here.\nPress any key to continue...", carReg);
                 Console.ReadKey();
                 Console.Clear();
                 MainMenu();
@@ -412,7 +412,7 @@ namespace PragueParking
                 {
                     for (int i = 0; i < ParkingList.Length; i++)
                     {
-                        Console.WriteLine("Enter the spot you want to change to:");
+                        Console.Write("Enter the spot you want to change to:");
                         int newSpot = int.Parse(Console.ReadLine());
                         if (ParkingList[newSpot - 1] == ParkingList[i])
                         {
@@ -476,7 +476,7 @@ namespace PragueParking
             {
                 int index = FindIndex(userReg);
 
-                Console.Write("Enter new parking spot:");
+                Console.Write("Enter the spot you want to change to:");
                 int newSpot = int.Parse(Console.ReadLine());
                 if (ParkingList[newSpot - 1] == null && ParkingList[index] == "MC#" + userReg)
                 {
@@ -501,7 +501,7 @@ namespace PragueParking
                     Console.Clear();
                     MainMenu();
                 }
-                else if (ParkingList[index].Contains("/") && ParkingList[newSpot - 1].Contains("MC#"))
+                else if (ParkingList[index].Contains("/") && ParkingList[newSpot - 1].Contains("MC#")|| ParkingList[index].Contains("/"))
                 {
                     string[] vehicles = ParkingList[index].Split("/");
                     foreach (var vehicle in vehicles)
@@ -537,10 +537,16 @@ namespace PragueParking
                     Console.Clear();
                     MainMenu();
                 }
+                else{
+                    Console.WriteLine("You are trying to move an MC but the license plate number is for an car.\nPress any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MainMenu();
+                }
 
             }
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Vehicle {0} is not parked here\nPress any key to continue...",userReg);
+            Console.WriteLine("Vehicle {0} is either a Car or its not parked here\nPress any key to continue...", userReg);
             Console.ReadKey();
             Console.Clear();
             MainMenu();
