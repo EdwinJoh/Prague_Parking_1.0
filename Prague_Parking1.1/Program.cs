@@ -494,7 +494,7 @@ namespace PragueParking
         {
             spot = spot - 1;
             ParkingList[spot] = vehicle;
-        }// lägg till datum och tid 
+        }
         public static void MoveCar()
         {
             Console.Clear();
