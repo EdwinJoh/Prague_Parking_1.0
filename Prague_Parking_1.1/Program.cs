@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
 
 
@@ -389,9 +390,16 @@ namespace PragueParking
                 }
                 else if (ParkingList[i] == "CAR#" + userReg || ParkingList[i] == "MC#" + userReg)
                 {
+                    int ticketIndex = FindTicket(userReg);
+                    string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
+                    DateTime checkInDate = DateTime.Parse(ticketDate);
+                    TimeSpan interval = now - checkInDate;
+                    TicketList[ticketIndex] = null;
+
                     ParkingList[i] = null;
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
+                    Console.WriteLine("Vehicle has been parked for {0} hours",interval);
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
