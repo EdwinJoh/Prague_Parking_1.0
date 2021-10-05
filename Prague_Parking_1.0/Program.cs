@@ -58,7 +58,7 @@ namespace PragueParking
             catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("Wrong input, try again with an integer {0}", e.Message);
+                Console.WriteLine("Wrong input. Try again with an integer {0}", e.Message);
                 MainMenu();
             }
         }
@@ -88,7 +88,7 @@ namespace PragueParking
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Wrong input, try an number from 1 - 3. press any key to go back...");
+                Console.WriteLine("Wrong input. Try an number from 1 - 3. press any key to go back...");
                 Console.ReadKey();
                 Console.Clear();
                 VehicleType();
@@ -170,7 +170,6 @@ namespace PragueParking
                 Console.ReadKey();
                 Console.Clear();
                 MainMenu();
-
             }
             else
             {
@@ -182,7 +181,7 @@ namespace PragueParking
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("This registration number is already parked");
-                            Console.WriteLine("Press any key for go back to the vehicle menu:");
+                            Console.Write("Press any key for go back to the vehicle menu:");
                             Console.ReadKey();
                             MainMenu();
                             break;
@@ -205,7 +204,7 @@ namespace PragueParking
                                     temp = string.Join(seperator, ParkingList[i], mcReg);
                                     ParkingList[i] = temp;
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    recipt = $"Parking vehicle {mcReg} at parking space {i + 1 }\nParking started at {now}";
+                                    recipt = $"Parking vehicle {mcReg} at parking space {i + 1}\nParking started at {now}";
                                     Console.WriteLine("{0}\nPress any key to continue...", recipt);
                                     Console.ReadKey();
                                     Console.Clear();
@@ -280,7 +279,6 @@ namespace PragueParking
             switch (userInput)
             {
                 case 1:
-
                     MoveCar();
                     break;
                 case 2:
@@ -433,9 +431,7 @@ namespace PragueParking
                     Console.WriteLine("Moveing vehicle {0} to new parking spot {1}", userReg, newSpot);
                     Console.ReadKey();
                     MainMenu();
-
                 }
-
                 else if (ParkingList[newSpot - 1] != null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -455,7 +451,6 @@ namespace PragueParking
             }
         }
         public static void MoveMC()
-
         {
             DateTime now = DateTime.Now;
             Console.Clear();
@@ -502,7 +497,6 @@ namespace PragueParking
                         ParkingList[newSpot - 1] = "MC#" + userReg;
                         ParkingList[index] = null;
                     }
-
                 }
                 else if (ParkingList[newSpot - 1].Contains("/"))
                 {
@@ -520,8 +514,6 @@ namespace PragueParking
                     Console.Clear();
                     MainMenu();
                 }
-
-
                 else if (ParkingList[newSpot - 1].Contains("MC#") && ParkingList[index] == "MC#" + userReg)
                 {
                     string temp;
@@ -534,7 +526,6 @@ namespace PragueParking
                 Console.WriteLine("Moving vehicle {0} to new spot {1}\nPress any key to continue...", userReg, newSpot);
                 Console.ReadKey();
                 Console.Clear();
-
             }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Could not find a vehicle with licens plate: {0}\nPress any key to continue...", userReg);
