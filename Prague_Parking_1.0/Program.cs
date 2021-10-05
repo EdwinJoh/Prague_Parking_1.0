@@ -368,19 +368,13 @@ namespace PragueParking
             Console.Write("Enter licens plate number:");
             string userReg = Console.ReadLine().ToUpper();
             Console.Clear();
-            for (int i = 0; i < ParkingList.Length; i++)
+            if (SearchVehicle(userReg))
             {
-                if (ParkingList[i] != null)
-                {
-                    if (ParkingList[i].Contains("MC#" + userReg) || ParkingList[i].Contains("CAR#" + userReg))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{i + 1}\nPress any key to continue...");
-                        Console.ReadLine();
-                        MainMenu();
-                        break;
-                    }
-                }
+                int index = FindIndex(userReg);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{index + 1}\nPress any key to continue...");
+                Console.ReadLine();
+                MainMenu();
             }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Vehicle {userReg} is not parked here.\nPress any hey to continue..");
@@ -572,8 +566,33 @@ namespace PragueParking
             }
             return 0;
         }
+        public static bool SearchVehicle(string userInput)
+        {
+            for (int i = 0; i < ParkingList.Length; i++)
+            {
+                if (ParkingList[i] != null && ParkingList[i].Contains(userInput))
+                {
+                    string[] vehicles = ParkingList[i].Split("/");
+
+                    if (vehicles[0] == "MC#" + userInput || vehicles[0] == "CAR#" + userInput)
+                    {
+                        return true;
+                    }
+                    else if (vehicles[1] == "MC#" + userInput || vehicles[0] == "CAR#" + userInput)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
+
 
 
 
