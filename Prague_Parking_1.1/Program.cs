@@ -455,7 +455,7 @@ namespace PragueParking
             Console.Write("Enter licens plate number:");
             string userReg = Console.ReadLine().ToUpper();
             Console.Clear();
-            if (SearchTwo(userReg))
+            if (SearchVehicle(userReg))
             {
                 int index = FindIndex(userReg);
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -685,7 +685,7 @@ namespace PragueParking
             }
             return 0;
         }
-        public static bool SearchTwo(string userInput)
+        public static bool SearchVehicle(string userInput)
         {
             for (int i = 0; i < ParkingList.Length; i++)
             {
