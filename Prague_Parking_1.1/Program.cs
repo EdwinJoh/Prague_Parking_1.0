@@ -324,10 +324,9 @@ namespace PragueParking
                     Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
                     n++;
                 }
-                else if (ParkingList[i].Contains("MC#") && ParkingList[i].Length <= 8)
+                else if (ParkingList[i].Contains("MC#") && ParkingList[i].Length <= 10)
                 {
                     {
-
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
                         n++;
@@ -383,21 +382,22 @@ namespace PragueParking
             string userReg = Console.ReadLine().ToUpper();
             DateTime now = DateTime.Now;
             Console.Clear();
+
             for (int i = 0; i < ParkingList.Length; i++)
             {
+                int ticketIndex = FindTicket(userReg);
+                string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
+                DateTime checkInDate = DateTime.Parse(ticketDate);
+                TimeSpan interval = new TimeSpan();
+                interval = now - checkInDate;
+                string output = null;
+
                 if (ParkingList[i] == null)
                 {
                     continue;
                 }
                 else if (ParkingList[i] == "CAR#" + userReg || ParkingList[i] == "MC#" + userReg)
                 {
-                    int ticketIndex = FindTicket(userReg);
-                    string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
-                    DateTime checkInDate = DateTime.Parse(ticketDate);
-                    TimeSpan interval = new TimeSpan();
-                    interval = now - checkInDate;
-
-                    string output = null;
                     TicketList[ticketIndex] = null;
                     ParkingList[i] = null;
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -417,11 +417,15 @@ namespace PragueParking
                     {
                         if (parkingSpot[0] == "MC#" + userReg)
                         {
+                            TicketList[ticketIndex] = null;
                             parkingSpot[0] = null;
                             ParkingList[i] = parkingSpot[1];
                             Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Clear();
                             Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
-                            Console.WriteLine("Press any key to continue...");
+                            output = "Vehicle has been parked for: " + interval.ToString(@"dd\.hh\:mm\:ss");
+                            Console.WriteLine(output);
+                            Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
                             MainMenu();
@@ -429,12 +433,15 @@ namespace PragueParking
                         }
                         else if (parkingSpot[1] == "MC#" + userReg)
                         {
+                            TicketList[ticketIndex] = null;
                             parkingSpot[1] = null;
                             ParkingList[i] = parkingSpot[0];
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Clear();
-                            Console.WriteLine("Removing Car {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
-                            Console.WriteLine("Press any key to continue...");
+                            Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
+                            output = "Vehicle has been parked for: " + interval.ToString(@"dd\.hh\:mm\:ss");
+                            Console.WriteLine(output);
+                            Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
                             MainMenu();
@@ -711,17 +718,17 @@ namespace PragueParking
             return false;
         }
         public static void MenuDesign()
-       {
-           Console.WriteLine("\n"+
-" 00000011                                                   000000ba                    11       oo                   \n"+
-" 00    `01                                                  00    `01                   00                            \n"+
-" 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n"+
-" 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n"+
-" 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n"+
-" 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n"+
-"oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n"+
-"                              d0000P                                                                          d0000P  \n" );
-       }
+        {
+            Console.WriteLine("\n" +
+ " 00000011                                                   000000ba                    11       oo                   \n" +
+ " 00    `01                                                  00    `01                   00                            \n" +
+ " 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n" +
+ " 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n" +
+ " 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n" +
+ " 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n" +
+ "oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n" +
+ "                              d0000P                                                                          d0000P  \n");
+        }
 
     }
 }
