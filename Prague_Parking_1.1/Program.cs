@@ -44,7 +44,8 @@ namespace PragueParking
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Prague Parking\n" +
+                MenuDesign();
+                Console.WriteLine("\n" +
                  "Enter choise below\n" +
                 "[1] Add vehicle\n" +
                 "[2] See parked vehicles\n" +
@@ -709,6 +710,18 @@ namespace PragueParking
             }
             return false;
         }
+        public static void MenuDesign()
+       {
+           Console.WriteLine("\n"+
+" 00000011                                                   000000ba                    11       oo                   \n"+
+" 00    `01                                                  00    `01                   00                            \n"+
+" 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n"+
+" 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n"+
+" 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n"+
+" 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n"+
+"oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n"+
+"                              d0000P                                                                          d0000P  \n" );
+       }
 
     }
 }
