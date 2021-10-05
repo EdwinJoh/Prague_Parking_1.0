@@ -25,9 +25,23 @@ namespace PragueParking
                     TicketList.CopyTo(list, 0);
 
                     ParkingList = null;
-                    Console.WriteLine("The time is now 00.00, all the vehicles that are parked here now is been moved to a diffrent parkinglot\n" +
-                    "Parked vehicles is fined xx SEK.");
+                    Console.WriteLine("The time is now 23:59 all the vehicles that are parked here now is been moved to a diffrent parkinglot\n" +
+                    "Parked vehicles is fined xx SEK.\n");
+                    Console.Write("The vehicles that´s going to get moved is:");
+                    foreach (var vehicles in list)
+                    {
+                        if (vehicles != null)
+                        {
+                            Console.WriteLine(vehicles);
 
+                        }
+                        else if (vehicles == null)
+                        {
+                            continue;
+                        }
+
+                    }
+                    MainMenu();
                 }
 
 
@@ -612,6 +626,7 @@ namespace PragueParking
                             Console.WriteLine("This spot is allocated to a car, please choose another spot\nPress any key to continue back...");
                             Console.ReadKey();
                             Console.Clear();
+                            Console.ResetColor();
                             MoveMC();
                         }
                         else if (ParkingList[newSpot - 1] == ParkingList[i])
