@@ -323,7 +323,7 @@ namespace PragueParking
                     Console.Write(i + 1 + ": " + ParkingList[i] + "\t");
                     n++;
                 }
-                else if (ParkingList[i].Contains("MC#") && ParkingList[i].Length <= 10)
+                else if (ParkingList[i].Contains("MC#") && ParkingList[i].Length <= 8)
                 {
                     {
 
