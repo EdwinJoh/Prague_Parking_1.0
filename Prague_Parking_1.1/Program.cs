@@ -74,7 +74,7 @@ namespace PragueParking
                         break;
                     case 6:
                         Ticket();
-                            break;
+                        break;
                     case 9:
                         Console.WriteLine("Program quitting...");
                         Environment.Exit(0);
@@ -156,7 +156,7 @@ namespace PragueParking
                         SpotAllocation(empty, spotRecipt);
                         Console.Clear();
                         break;
- 
+
                     }
                     else if (ParkingList[i] != null)
                     {
@@ -393,13 +393,16 @@ namespace PragueParking
                     int ticketIndex = FindTicket(userReg);
                     string ticketDate = TicketList[ticketIndex].Replace(userReg, "");
                     DateTime checkInDate = DateTime.Parse(ticketDate);
-                    TimeSpan interval = now - checkInDate;
-                    TicketList[ticketIndex] = null;
+                    TimeSpan interval = new TimeSpan();
+                    interval = now - checkInDate;
 
+                    string output = null;
+                    TicketList[ticketIndex] = null;
                     ParkingList[i] = null;
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
-                    Console.WriteLine("Vehicle has been parked for {0} hours",interval);
+                    output = "Vehicle has been parked for: " + interval.ToString(@"dd\.hh\:mm\:ss");
+                    Console.WriteLine(output);
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                     Console.Clear();
@@ -452,20 +455,16 @@ namespace PragueParking
             Console.Write("Enter licens plate number:");
             string userReg = Console.ReadLine().ToUpper();
             Console.Clear();
-            for (int i = 0; i < ParkingList.Length; i++)
+            if (SearchTwo(userReg))
             {
-                if (ParkingList[i] != null)
-                {
-                    if (ParkingList[i].Contains("MC#" + userReg) || ParkingList[i].Contains("CAR#" + userReg))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{i + 1}\nPress any key to continue...");
-                        Console.ReadLine();
-                        MainMenu();
-                        break;
-                    }
-                }
+                int index = FindIndex(userReg);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{index + 1}\nPress any key to continue...");
+                Console.ReadLine();
+                MainMenu();
             }
+
+
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Vehicle {userReg} is not parked here.\nPress any hey to continue..");
             Console.ReadKey();
@@ -686,8 +685,35 @@ namespace PragueParking
             }
             return 0;
         }
+        public static bool SearchTwo(string userInput)
+        {
+            for (int i = 0; i < ParkingList.Length; i++)
+            {
+                if (ParkingList[i] != null && ParkingList[i].Contains(userInput))
+                {
+                    string[] vehicles = ParkingList[i].Split("/");
+
+                    if (vehicles[0] == "MC#" + userInput || vehicles[0] == "CAR#" + userInput)
+                    {
+                        return true;
+                    }
+                    else if (vehicles[1] == "MC#" + userInput || vehicles[0] == "CAR#" + userInput)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }
+
+
 
 
 
