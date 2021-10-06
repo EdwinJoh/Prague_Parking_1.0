@@ -134,6 +134,7 @@ namespace PragueParking
             Console.WriteLine("\t*** Park a Car ***\n");
             Console.Write("Enter your License plate number:");
             string carReg = Console.ReadLine().ToUpper();
+            carReg = carReg.Replace(" ","");
             Console.Clear();
             if (SearchReg(carReg))
             {
@@ -206,6 +207,7 @@ namespace PragueParking
             Console.WriteLine("\t*** Park a MC ***\n");
             Console.Write("Enter your License plate number:");
             mcReg = Console.ReadLine().ToUpper();
+            mcReg = mcReg.Replace(" ","");
             Console.Clear();
             if (SearchReg(mcReg))
             {
