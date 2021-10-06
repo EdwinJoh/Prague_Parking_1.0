@@ -13,7 +13,7 @@ namespace PragueParking
         {
             MainMenu();
         }
-        public static void MainMenu()
+        public static void MainMenu() // Menu selection
         {
             try
             {
@@ -58,11 +58,11 @@ namespace PragueParking
             catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("Wrong input. Try again with an integer {0}\n{1}", e.Message, e.StackTrace);
+                Console.WriteLine("Wrong input. Try again with an integer {0}", e.Message);
                 MainMenu();
             }
         }
-        public static void VehicleType()
+        public static void VehicleType() // Vehicle selection. Car or Mc
         {
             Console.Clear();
             Console.WriteLine("*** Park Vehicle ***");
@@ -94,7 +94,7 @@ namespace PragueParking
                 VehicleType();
             }
         }
-        public static void ParkCar()
+        public static void ParkCar() // Parking a Car
         {
             DateTime now = DateTime.Now;
             int empty = EmptySpace();
@@ -151,7 +151,7 @@ namespace PragueParking
                 MainMenu();
             }
         }
-        public static void McPark()
+        public static void McPark() // Parking a MC
         {
             string mcReg = "";
             DateTime now = DateTime.Now;
@@ -237,7 +237,7 @@ namespace PragueParking
             }
             MainMenu();
         }
-        public static void SeeParkedVehicles()
+        public static void SeeParkedVehicles() // List of all the vehicle that are parked
         {
             Console.Clear();
             Console.WriteLine("Prague Parking");
@@ -266,7 +266,7 @@ namespace PragueParking
             Console.Clear();
             MainMenu();
         }
-        public static void Move()
+        public static void Move() // Move selection Car or MC
         {
             Console.Clear();
             Console.WriteLine("\t*** Moving a vehicle ***\n");
@@ -295,7 +295,7 @@ namespace PragueParking
                     break;
             }
         }
-        public static void RemoveVehicle()
+        public static void RemoveVehicle() // Remove a vehicle
         {
             Console.Clear();
             Console.WriteLine("\t*** Removing a vehicle ***\n");
@@ -359,7 +359,7 @@ namespace PragueParking
             Console.ReadKey();
             MainMenu();
         }
-        public static void Search()
+        public static void Search()// Search for an vehicle that are parked
         {
             Console.Clear();
             Console.WriteLine("\t*** Parking lot ***\n");
@@ -380,7 +380,7 @@ namespace PragueParking
             Console.Clear();
             MainMenu();
         }
-        public static int EmptySpace()
+        public static int EmptySpace() // looks for empty space 
         {
             Console.Clear();
             int counter = 0;
@@ -405,12 +405,12 @@ namespace PragueParking
             emptySpot = counter;
             return emptySpot;
         }
-        public static void SpotAllocation(int spot, string vehicle)
+        public static void SpotAllocation(int spot, string vehicle) // allocate an parkingspace for the vehicles
         {
             spot = spot - 1;
             ParkingList[spot] = vehicle;
         }
-        public static void MoveCar()
+        public static void MoveCar() // Moving Car
         {
             Console.Clear();
             Console.WriteLine("\t*** Moving a Car ***\n");
@@ -450,7 +450,7 @@ namespace PragueParking
                 MainMenu();
             }
         }
-        public static void MoveMC()
+        public static void MoveMC() // Moving MC
         {
             DateTime now = DateTime.Now;
             Console.Clear();
@@ -533,7 +533,7 @@ namespace PragueParking
             Console.Clear();
             MainMenu();
         }
-        public static bool SearchReg(string userReg)
+        public static bool SearchReg(string userReg) // Looking for licensPlate number
         {
             userReg.ToUpper();
             for (int i = 0; i < ParkingList.Length; i++)
@@ -545,7 +545,7 @@ namespace PragueParking
             }
             return false;
         }
-        public static int FindIndex(string userReg)
+        public static int FindIndex(string userReg) // Finding index of an parked vehicle
         {
             for (int i = 0; i < ParkingList.Length; i++)
             {
@@ -557,7 +557,7 @@ namespace PragueParking
             }
             return 0;
         }
-        public static bool SearchVehicle(string userInput)
+        public static bool SearchVehicle(string userInput) // Searching for a vehicle for the search metod
         {
             for (int i = 0; i < ParkingList.Length; i++)
             {
