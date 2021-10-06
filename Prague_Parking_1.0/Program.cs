@@ -58,7 +58,7 @@ namespace PragueParking
             catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("Wrong input. Try again with an integer {0}", e.Message);
+                Console.WriteLine("Wrong input. Try again with an integer {0}\n{1}", e.Message, e.StackTrace);
                 MainMenu();
             }
         }
