@@ -89,7 +89,7 @@ namespace PragueParking
             catch (Exception e)
             {
                 Console.Clear();
-                Console.WriteLine("Wrong input, try again with an integer {0}\n{1}", e.Message, e.StackTrace);
+                Console.WriteLine("Wrong input, try again with a number {0}\n{1}", e.Message, e.StackTrace);
                 MainMenu();
             }
         }
@@ -102,7 +102,7 @@ namespace PragueParking
                 "[2] Mc\n" +
                 "[3] Main Menu");
             int userInput = int.Parse(Console.ReadLine());
-
+            // swich sats
             if (userInput == 1)
             {
                 ParkCar();
@@ -119,7 +119,7 @@ namespace PragueParking
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Wrong input, try an number from 1 - 3. press any key to go back...");
+                Console.WriteLine("Wrong input. Enter an valid number. Press any key to go back...");
                 Console.ReadKey();
                 Console.Clear();
                 VehicleType();
@@ -221,64 +221,50 @@ namespace PragueParking
             {
                 if (mcReg.Length >= 4 && mcReg.Length <= 10)
                 {
-                    for (int j = 0; j < ParkingList.Length; j++)
+                    for (int i = 0; i < ParkingList.Length; i++)
                     {
-                        if (ParkingList[j] != null && ParkingList[j].Contains("MC#" + mcReg))
+                        if (ParkingList[i] != null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("This registration number is already parked");
-                            Console.WriteLine("Press any key for go back to the vehicle menu:");
-                            Console.ReadKey();
-                            MainMenu();
-                            break;
-                        }
-                    }
-                    if (mcReg.Length >= 4 && mcReg.Length <= 10)
-                    {
-                        for (int i = 0; i < ParkingList.Length; i++)
-                        {
-                            if (ParkingList[i] != null)
+                            if (ParkingList[i].Contains("/"))
                             {
-                                if (ParkingList[i].Contains("/"))
-                                {
-                                    continue;
-                                }
-                                if (ParkingList[i].Contains("MC#"))
-                                {
-                                    string temp;
-                                    string seperator = "/MC#";
-                                    temp = string.Join(seperator, ParkingList[i], mcReg);
-                                    ParkingList[i] = temp;
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    recipt = $"Parking vehicle {mcReg} at parking space {i + 1 }\nParking started at {now}";
-                                    Console.WriteLine("{0}\nPress any key to continue...", recipt);
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
+                                continue;
                             }
-                            if (ParkingList[i] == null)
+                            if (ParkingList[i].Contains("MC#"))
                             {
+                                string temp;
+                                string seperator = "/MC#";
+                                temp = string.Join(seperator, ParkingList[i], mcReg);
+                                ParkingList[i] = temp;
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                recipt = $"Parking vehicle {mcReg} at parking space {empty}\nParking started at {now}";
-                                Console.WriteLine("{0} \nPress any key to continue...", recipt);
+                                recipt = $"Parking vehicle {mcReg} at parking space {i + 1 }\nParking started at {now}";
+                                Console.WriteLine("{0}\nPress any key to continue...", recipt);
                                 Console.ReadKey();
-                                spotRecipt = "MC#" + mcReg;
-                                SpotAllocation(empty, spotRecipt);
                                 Console.Clear();
                                 break;
                             }
                         }
-                        for (int i = 0; i < TicketList.Length; i++)
+                        if (ParkingList[i] == null)
                         {
-                            if (TicketList[i] == null)
-                            {
-                                TicketList[i] = mcReg + " " + now;
-                                break;
-                            }
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            recipt = $"Parking vehicle {mcReg} at parking space {empty}\nParking started at {now}";
+                            Console.WriteLine("{0} \nPress any key to continue...", recipt);
+                            Console.ReadKey();
+                            spotRecipt = "MC#" + mcReg;
+                            SpotAllocation(empty, spotRecipt);
+                            Console.Clear();
+                            break;
                         }
-                        MainMenu();
                     }
+                    for (int i = 0; i < TicketList.Length; i++)
+                    {
+                        if (TicketList[i] == null)
+                        {
+                            TicketList[i] = mcReg + " " + now;
+                            break;
+                        }
+                    }
+                    MainMenu();
+
                 }
                 else
                 {

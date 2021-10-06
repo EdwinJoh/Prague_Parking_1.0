@@ -11,9 +11,14 @@ namespace PragueParking
 
         static void Main(string[] args)
         {
-            MainMenu();
+            int menu;
+            do
+            {
+                 menu = MainMenu();
+               
+            } while (menu != 9);
         }
-        public static void MainMenu() // Menu selection
+        public static int MainMenu() // Menu selection
         {
             try
             {
@@ -47,7 +52,7 @@ namespace PragueParking
                         break;
                     case 9:
                         Console.WriteLine("Program quitting...");
-                        Environment.Exit(0);
+
                         break;
                     default:
                         Console.WriteLine("The number is not in the menu. Enter an number from 1-9");
@@ -61,6 +66,7 @@ namespace PragueParking
                 Console.WriteLine("Wrong input. Try again with an integer {0}", e.Message);
                 MainMenu();
             }
+            return 9;
         }
         public static void VehicleType() // Vehicle selection. Car or Mc
         {
