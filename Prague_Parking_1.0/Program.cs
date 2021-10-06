@@ -103,7 +103,7 @@ namespace PragueParking
             Console.WriteLine("\t*** Park a Car ***\n");
             Console.Write("Enter your License plate number:");
             string carReg = Console.ReadLine().ToUpper();
-            carReg = carReg.Replace(" ","");
+            carReg = carReg.Replace(" ", "");
             Console.Clear();
             if (SearchReg(carReg))
             {
@@ -164,7 +164,7 @@ namespace PragueParking
             Console.WriteLine("\t*** Park a MC ***\n");
             Console.Write("Enter your License plate number:");
             mcReg = Console.ReadLine().ToUpper();
-            mcReg = mcReg.Replace(" ","");
+            mcReg = mcReg.Replace(" ", "");
             Console.Clear();
             if (SearchReg(mcReg))
             {
@@ -424,7 +424,13 @@ namespace PragueParking
                 int index = FindIndex(userReg);
                 Console.WriteLine("Enter the spot you want to change to:");
                 int newSpot = int.Parse(Console.ReadLine());
-
+                if (newSpot > 100)
+                {
+                    Console.WriteLine("we only have parking spot up to 100\nPress any key to continue...");
+                    Console.Read();
+                    Console.Clear();
+                    MainMenu();
+                }
                 if (ParkingList[newSpot - 1] == null)
                 {
                     ParkingList[newSpot - 1] = "CAR#" + userReg;
@@ -466,8 +472,14 @@ namespace PragueParking
                 int index = FindIndex(userReg);
                 Console.Write("Enter the spot you want to change to:");
                 int newSpot = int.Parse(Console.ReadLine());
-
-                if (ParkingList[index] == ParkingList[newSpot - 1])
+                if (newSpot > 100)
+                {
+                    Console.WriteLine("we only have parking spot up to 100\nPress any key to continue...");
+                    Console.Read();
+                    Console.Clear();
+                    MainMenu();
+                }
+                else if (ParkingList[index] == ParkingList[newSpot - 1])
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Your vehicle is already parked here\nPress any key to continue..");
