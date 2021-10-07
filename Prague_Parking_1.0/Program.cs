@@ -32,8 +32,8 @@ namespace PragueParking
                 "[5] Search for vehicle\n" +
                 "[9] Quit Program\n");
 
-                int menuInput = int.Parse(Console.ReadLine());
-                switch (menuInput)
+                int menu = int.Parse(Console.ReadLine());
+                switch (menu)
                 {
                     case 1:
                         VehicleType();
@@ -112,7 +112,7 @@ namespace PragueParking
             string carReg = Console.ReadLine().ToUpper();
             carReg = carReg.Replace(" ", "");
             Console.Clear();
-            if (SearchReg(carReg))
+            if (SearchRegCar(carReg))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Vehicle {0} is already parked here", carReg);
@@ -147,7 +147,7 @@ namespace PragueParking
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The Entered license plate number is to short or to long.\nPress any key to continue...");
+                Console.WriteLine("The Entered license plate number is to short or to long.\n");
                 standardText();
             }
         }
@@ -165,7 +165,7 @@ namespace PragueParking
             mcReg = Console.ReadLine().ToUpper();
             mcReg = mcReg.Replace(" ", "");
             Console.Clear();
-            if (SearchReg(mcReg))
+            if (SearchRegMC(mcReg))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Vehicle is already parked here.\nPress any key to continue...");
@@ -387,7 +387,7 @@ namespace PragueParking
             Console.Write("Enter license plate plate number:");
             string userReg = Console.ReadLine().ToUpper();
             Console.Clear();
-            if (SearchReg(userReg))
+            if (SearchRegCar(userReg))
             {
                 int index = FindIndex(userReg);
                 Console.WriteLine("Enter the spot you want to change to:");
@@ -427,7 +427,7 @@ namespace PragueParking
             Console.Write("Enter license plate plate number:");
             string userReg = Console.ReadLine().ToUpper();
             Console.Clear();
-            if (SearchReg(userReg))
+            if (SearchRegMC(userReg))
             {
 
                 int index = FindIndex(userReg);
@@ -497,12 +497,12 @@ namespace PragueParking
             Console.WriteLine("Could not find a vehicle: {0}\n", userReg);
             standardText();
         }
-        public static bool SearchReg(string userReg) // Looking for licensPlate number
+        public static bool SearchRegCar(string userReg) // Looking for licensPlate number
         {
             userReg.ToUpper();
             for (int i = 0; i < ParkingList.Length; i++)
             {
-                if (ParkingList[i] != null && ParkingList[i].Contains(userReg))
+                if (ParkingList[i] != null && ParkingList[i].Contains("CAR#" + userReg))
                 {
                     return true;
                 }
@@ -551,6 +551,18 @@ namespace PragueParking
             Console.ReadKey();
             Console.Clear();
             MainMenu();
+        }
+        public static bool SearchRegMC(string userReg) // Looking for licensPlate number in the array
+        {
+            userReg.ToUpper();
+            for (int i = 0; i < ParkingList.Length; i++)
+            {
+                if (ParkingList[i] != null && ParkingList[i].Contains("MC#" + userReg))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
