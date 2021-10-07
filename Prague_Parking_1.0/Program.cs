@@ -547,6 +547,7 @@ namespace PragueParking
                 Console.WriteLine("Moving vehicle {0} to new spot {1}\nPress any key to continue...", userReg, newSpot);
                 Console.ReadKey();
                 Console.Clear();
+                MainMenu();
             }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Could not find a vehicle with licens plate: {0}\nPress any key to continue...", userReg);
@@ -601,6 +602,13 @@ namespace PragueParking
                 }
             }
             return false;
+        }
+    static void standardText()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            MainMenu();
         }
     }
 }
