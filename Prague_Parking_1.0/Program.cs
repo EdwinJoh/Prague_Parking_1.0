@@ -71,7 +71,7 @@ namespace PragueParking
         public static void VehicleType() // Vehicle selection. Car or Mc
         {
             Console.Clear();
-            Console.WriteLine("*** Park Vehicle ***");
+            Console.WriteLine("\t*** Park Vehicle ***");
             Console.WriteLine("Do you have a car or an MC:\n" +
                 "[1] Car\n" +
                 "[2] Mc\n" +
@@ -106,6 +106,7 @@ namespace PragueParking
             int empty = EmptySpace();
             string spotRecipt = "";
             Console.Clear();
+            
             Console.WriteLine("\t*** Park a Car ***\n");
             Console.Write("Enter your License plate number:");
             string carReg = Console.ReadLine().ToUpper();
