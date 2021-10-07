@@ -628,6 +628,7 @@ namespace PragueParking
                 Console.WriteLine("Moving vehicle {0} to new spot {1}\nPress any key to continue...", userReg, newSpot);
                 Console.ReadKey();
                 Console.Clear();
+                MainMenu();
 
             }
             Console.ForegroundColor = ConsoleColor.Red;

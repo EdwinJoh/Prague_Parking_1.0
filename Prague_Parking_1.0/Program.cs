@@ -14,8 +14,8 @@ namespace PragueParking
             int menu;
             do
             {
-                 menu = MainMenu();
-               
+                menu = MainMenu();
+
             } while (menu != 9);
         }
         public static int MainMenu() // Menu selection
@@ -106,7 +106,7 @@ namespace PragueParking
             int empty = EmptySpace();
             string spotRecipt = "";
             Console.Clear();
-            
+
             Console.WriteLine("\t*** Park a Car ***\n");
             Console.Write("Enter your License plate number:");
             string carReg = Console.ReadLine().ToUpper();
@@ -115,10 +115,8 @@ namespace PragueParking
             if (SearchReg(carReg))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Vehicle {0} is already parked here.\nPress any key to continue...", carReg);
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+                Console.WriteLine("Vehicle {0} is already parked here", carReg);
+                standardText();
             }
             if (carReg.Length >= 4 && carReg.Length <= 10)
             {
@@ -127,13 +125,11 @@ namespace PragueParking
                     if (ParkingList[i] == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n");
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
                         spotRecipt = "CAR#" + carReg;
                         SpotAllocation(empty, spotRecipt);
-                        Console.Clear();
-                        MainMenu();
+                        Console.WriteLine($"Parking vehicle {carReg} at parking space {empty}\nParking started at {now}\n");
+                        standardText();
+
                     }
                     else if (ParkingList[i] != null)
                     {
@@ -142,10 +138,8 @@ namespace PragueParking
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("The parkinglot is full Please come back later.\nPress any key to continue...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        MainMenu();
+                        Console.WriteLine("The parkinglot is full Please come back later.");
+                        standardText();
                     }
                 }
             }
@@ -154,9 +148,7 @@ namespace PragueParking
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The Entered license plate number is to short or to long.\nPress any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+               standardText();
             }
         }
         public static void McPark() // Parking a MC
@@ -175,10 +167,9 @@ namespace PragueParking
             Console.Clear();
             if (SearchReg(mcReg))
             {
+                Console.ForegroundColor =ConsoleColor.Red;
                 Console.WriteLine("Vehicle is already parked here.\nPress any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+                standardText();
             }
             else
             {
@@ -603,7 +594,7 @@ namespace PragueParking
             }
             return false;
         }
-    static void standardText()
+        static void standardText()
         {
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
