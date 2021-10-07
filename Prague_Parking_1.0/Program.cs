@@ -314,7 +314,7 @@ namespace PragueParking
                             ParkingList[i] = parkingSpot[1];
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Removing vehicle {0}. Thanks for using us and welcome back!\nParking ended at {1}", userReg, now);
-                           standardText();
+                            standardText();
                         }
                         else if (parkingSpot[1] == "MC#" + userReg)
                         {
@@ -343,9 +343,8 @@ namespace PragueParking
             {
                 int index = FindIndex(userReg);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{index + 1}\n"Press any key to continue..."");
-                Console.ReadLine();
-                MainMenu();
+                Console.WriteLine($"Your vehicle {userReg} is parked at parking space:{index + 1}\n");
+                standardText();
             }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Vehicle {userReg} is not parked here.\nPress any hey to continue..");
@@ -369,10 +368,8 @@ namespace PragueParking
                 else if (counter == 100)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Unfortunately there is no parkingspots available.\n press any key to continue...");
-                    Console.Read();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("Unfortunately there is no parkingspots available.\n");
+                    standardText();
                 }
             }
             emptySpot = counter;
@@ -397,10 +394,8 @@ namespace PragueParking
                 int newSpot = int.Parse(Console.ReadLine());
                 if (newSpot > 100)
                 {
-                    Console.WriteLine("we only have parking spot up to 100\nPress any key to continue...");
-                    Console.Read();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("we only have parking spot up to 100\n");
+                    standardText();
                 }
                 if (ParkingList[newSpot - 1] == null)
                 {
@@ -408,25 +403,20 @@ namespace PragueParking
                     ParkingList[index] = null;
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Moveing vehicle {0} to new parking spot {1}", userReg, newSpot);
-                    Console.ReadKey();
-                    MainMenu();
+                    standardText();
                 }
                 else if (ParkingList[newSpot - 1] != null)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("There is not enought room. This spot is allocated by a vehicle \nPress any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("There is not enought room. This spot is allocated by a vehicle \n");
+                    standardText();
                 }
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Could not find a vehicle with licens plate: {0}\nPress any key to continue...", userReg);
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+                Console.WriteLine("Could not find a vehicle with licens plate: {0}\n", userReg);
+                standardText();
             }
         }
         public static void MoveMC() // Moving MC
@@ -445,18 +435,14 @@ namespace PragueParking
                 int newSpot = int.Parse(Console.ReadLine());
                 if (newSpot > 100)
                 {
-                    Console.WriteLine("we only have parking spot up to 100\nPress any key to continue...");
-                    Console.Read();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("we only have parking spot up to 100\n");
+                    standardText();
                 }
                 else if (ParkingList[index] == ParkingList[newSpot - 1])
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Your vehicle is already parked here\nPress any key to continue..");
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("Your vehicle is already parked here\n");
+                    standardText();
                 }
                 else if (ParkingList[newSpot - 1] == null)
                 {
@@ -486,18 +472,14 @@ namespace PragueParking
                 else if (ParkingList[newSpot - 1].Contains("/"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("there is already 2 mc parked at this spot, please try again with another spot.\nPress any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("there is already 2 mc parked at this spot, please try again with another spot.\n");
+                    standardText();
                 }
                 else if (ParkingList[newSpot - 1].Contains("CAR#"))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("There is not enought room. There is an Car parked here.\nPress any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    MainMenu();
+                    Console.WriteLine("There is not enought room. There is an Car parked here.\n");
+                    standardText();
                 }
                 else if (ParkingList[newSpot - 1].Contains("MC#") && ParkingList[index] == "MC#" + userReg)
                 {
@@ -508,16 +490,12 @@ namespace PragueParking
                     ParkingList[index] = null;
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Moving vehicle {0} to new spot {1}\nPress any key to continue...", userReg, newSpot);
-                Console.ReadKey();
-                Console.Clear();
-                MainMenu();
+                Console.WriteLine("Moving vehicle {0} to new spot {1}\n", userReg, newSpot);
+                standardText();
             }
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Could not find a vehicle with licens plate: {0}\nPress any key to continue...", userReg);
-            Console.ReadKey();
-            Console.Clear();
-            MainMenu();
+            Console.WriteLine("Could not find a vehicle: {0}\n", userReg);
+            standardText();
         }
         public static bool SearchReg(string userReg) // Looking for licensPlate number
         {
