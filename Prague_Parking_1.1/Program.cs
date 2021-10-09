@@ -44,8 +44,8 @@ namespace PragueParking
                         }
                     }
                 }
-                MenuDesign();
                 Console.ForegroundColor = ConsoleColor.White;
+                MenuDesign();
                 Console.WriteLine("Prague Parking\n" +
                  "Enter choise below\n" +
                 "[1] Add vehicle\n" +
