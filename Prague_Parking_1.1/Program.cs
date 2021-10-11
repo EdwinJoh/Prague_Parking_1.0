@@ -6,6 +6,7 @@ namespace PragueParking
 {
     class Program
     {
+        // Creating tree diffrent array/ list that can contain strings
         public static string[] ParkingList = new string[100];
         public static string[] TicketList = new string[200];
         public static string[] List = new string[200];
@@ -13,18 +14,20 @@ namespace PragueParking
 
         static void Main(string[] args)
         {
+            //Program will run untill the user press number seven
             int menuInput;
             do
             {
                 menuInput = MainMenu();
 
-            } while (menuInput != 9);
+            } while (menuInput != 7);
         }
-        public static int MainMenu()
+        public static int MainMenu()                                    // Display the menu for the user and make it interactive using swich metod
         {
             Console.Clear();
             try
             {
+                // The loop below will remove all the objects in the arratý when time hits 23.59. and add them to the List array
                 TimeSpan time = DateTime.Now.TimeOfDay;
                 if (time > new TimeSpan(23, 59, 00) && time <= new TimeSpan(0, 00, 00))
                 {
@@ -91,11 +94,11 @@ namespace PragueParking
             {
                 Console.Clear();
                 Console.WriteLine("Wrong input. Try again with an integer {0}", e.Message);
-                MainMenu();
+                StandardReturnText();
             }
             return 7;
         }
-        static void VehicleType()
+        static void VehicleType()                                       // Letting the user choose if they want to add Car or MC
         {
             Console.Clear();
             Console.WriteLine("Choose a vehicle type below:\n" +
@@ -122,7 +125,7 @@ namespace PragueParking
                 StandardReturnText();
             }
         }
-        static void AddCar()
+        static void AddCar()                                            // Method for adding an Car
         {
             DateTime now = DateTime.Now;
             Console.Clear();
@@ -191,7 +194,7 @@ namespace PragueParking
             }
 
             return false;
-        }
+        }                  // Searching for an string in our ParkingList array to see if it exist or not
         static void SeeVehicles()
         {
             Console.Clear();
@@ -235,7 +238,7 @@ namespace PragueParking
                 }
             }
             StandardReturnText();
-        }
+        }                                   // Display all the array index 
         static void StandardReturnText()
         {
             Console.WriteLine("Press any key to continue...");
@@ -243,7 +246,7 @@ namespace PragueParking
             Console.Clear();
             MainMenu();
 
-        }
+        }                            // Standard text used for not write the same text over and over again
         static int FindIndex(string userInput, out int index)
         {
             for (int i = 0; i < ParkingList.Length; i++)
@@ -260,7 +263,7 @@ namespace PragueParking
             }
             index = 0;
             return index;
-        }
+        }       // Method for finding an index in out parkingList array
         static void RemoveVehicle()
         {
             Console.Clear();
@@ -328,7 +331,7 @@ namespace PragueParking
                 Console.WriteLine("Vehicle:{0} is not parked here try again.", userInput);
                 StandardReturnText();
             }
-        }
+        }                                 // Method for removing a vehicle
         static void SearchVehicle()
         {
             Console.Clear();
@@ -355,7 +358,7 @@ namespace PragueParking
                 Console.WriteLine("Vehicle:{0} is not parked here", userInput);
             }
             StandardReturnText();
-        }
+        }                                 // Method for searching an vehicle in out parking list array
         static void AddMc()
         {
             Console.Clear();
@@ -418,7 +421,7 @@ namespace PragueParking
                 Console.WriteLine("Vehicle is already parked here");
                 StandardReturnText();
             }
-        }
+        }                                         // Method for adding an MC
         static bool SearchRegMC(string userInput)
         {
             for (int i = 0; i < ParkingList.Length; i++)
@@ -433,7 +436,7 @@ namespace PragueParking
                 }
             }
             return false;
-        }
+        }                   // Searching for an string in our parking list array to see if it exist or not
         static void VehicleTypeMove()
         {
             Console.Clear();
@@ -461,7 +464,7 @@ namespace PragueParking
                 Console.WriteLine("Wrong input. Number is not valid. try again");
                 StandardReturnText();
             }
-        }
+        }                               // Letting the user choose which type of vehicle they want to move
         static void MoveCar()
         {
             Console.Clear();
@@ -495,7 +498,7 @@ namespace PragueParking
                 Console.WriteLine("The vehicle is either a MC or not parked here.");
                 StandardReturnText();
             }
-        }
+        }                                      // Method for moving an Car to another index in our array
         static void MoveMC()
         {
             Console.Clear();
@@ -587,7 +590,7 @@ namespace PragueParking
                 StandardReturnText();
 
             }
-        }
+        }                                       // Method for moving an Mc to another index in out array
         static void Tickets()
         {
             int count = 1;
@@ -605,7 +608,7 @@ namespace PragueParking
                 }
             }
             StandardReturnText();
-        }
+        }                                      // Method for lopping true our Ticker array, contains License plate and time when parked
         static int FindTicket(string userInput)
         {
             for (int i = 0; i < TicketList.Length; i++)
@@ -617,20 +620,8 @@ namespace PragueParking
                 }
             }
             return 0;
-        }
-        public static void MenuDesign()
-
-        {
-            Console.WriteLine("\n" +
- " 00000011                                                   000000ba                    11       oo                   \n" +
- " 00    `01                                                  00    `01                   00                            \n" +
- " 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n" +
- " 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n" +
- " 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n" +
- " 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n" +
- "oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n" +
- "                              d0000P                                                                          d0000P  \n");
-        }
+        }                   // Method used for finding the index in our Ticket array
+        public static void MenuDesign()                             // Prague parking design for the menu.
     }
 }
 
