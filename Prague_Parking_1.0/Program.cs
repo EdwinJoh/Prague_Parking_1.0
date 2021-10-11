@@ -239,6 +239,7 @@ namespace PragueParking
         static void RemoveVehicle()
         {
             Console.Clear();
+            Console.WriteLine("PRague parking\tRemoving vehicle");
             Console.Write("Enter Registration number:");
             string userInput = Console.ReadLine().ToUpper();
             int index = FindIndex(userInput, out index);
