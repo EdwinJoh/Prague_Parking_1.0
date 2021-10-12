@@ -508,7 +508,7 @@ namespace PragueParking
                 Console.WriteLine("The vehicle is either a MC or not parked here.");
                 StandardReturnText();
             }
-        }                                      // Method for moving an Car to another index in our array
+        }                                       // Method for moving an Car to another index in our array
         static void MoveMC()
         {
             Console.Clear();
@@ -608,7 +608,11 @@ namespace PragueParking
                 StandardReturnText();
 
             }
+<<<<<<< HEAD
         }                                       // Method for moving an Mc to another index in out array
+=======
+        }                                        // Method for moving an Mc to another index in out array
+>>>>>>> a1407f31b4e95643a0a6d9ac4f9dc4cb51446469
         static void Tickets()
         {
             int count = 1;
@@ -626,7 +630,11 @@ namespace PragueParking
                 }
             }
             StandardReturnText();
+<<<<<<< HEAD
         }                                      // Method for lopping true our Ticker array, contains License plate and time when parked
+=======
+        }                                       // Method for lopping true our Ticker array, contains License plate and time when parked
+>>>>>>> a1407f31b4e95643a0a6d9ac4f9dc4cb51446469
         static int FindTicket(string userInput)
         {
             for (int i = 0; i < TicketList.Length; i++)
@@ -638,7 +646,11 @@ namespace PragueParking
                 }
             }
             return 0;
+<<<<<<< HEAD
         }                   // Method used for finding the index in our Ticket arra
+=======
+        }                     // Method used for finding the index in our Ticket arra
+>>>>>>> a1407f31b4e95643a0a6d9ac4f9dc4cb51446469
         public static void MenuDesign()                                // Menu design
 
         {
