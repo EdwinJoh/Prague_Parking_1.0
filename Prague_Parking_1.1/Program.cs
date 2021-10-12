@@ -508,7 +508,7 @@ namespace PragueParking
                 Console.WriteLine("The vehicle is either a MC or not parked here.");
                 StandardReturnText();
             }
-        }                                      // Method for moving an Car to another index in our array
+        }                                       // Method for moving an Car to another index in our array
         static void MoveMC()
         {
             Console.Clear();
@@ -548,58 +548,58 @@ namespace PragueParking
                             ParkingList[index] = mcSplit[0];
                         }
                     }
-                
-            }
 
-            else if (ParkingList[newSpot - 1].Contains("CAR#"))
-            {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("There is not enought space.There is an car parked here.");
-                StandardReturnText();
-            }
-            else
-            {
-                if (ParkingList[newSpot - 1].Contains("/"))
+                }
+
+                else if (ParkingList[newSpot - 1].Contains("CAR#"))
                 {
                     Console.Clear();
-                    Console.WriteLine("This spot is allocated by two MC already. please try again.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("There is not enought space.There is an car parked here.");
                     StandardReturnText();
                 }
-                if (ParkingList[newSpot - 1].Contains("MC#"))
+                else
                 {
-                    if (ParkingList[index] == "MC#" + userInput)
+                    if (ParkingList[newSpot - 1].Contains("/"))
                     {
-                        string seperator = "/MC#";
-                        string temp = string.Join(seperator, ParkingList[newSpot - 1], userInput);
-                        ParkingList[newSpot - 1] = temp;
-                        ParkingList[index] = null;
+                        Console.Clear();
+                        Console.WriteLine("This spot is allocated by two MC already. please try again.");
+                        StandardReturnText();
+                    }
+                    if (ParkingList[newSpot - 1].Contains("MC#"))
+                    {
+                        if (ParkingList[index] == "MC#" + userInput)
+                        {
+                            string seperator = "/MC#";
+                            string temp = string.Join(seperator, ParkingList[newSpot - 1], userInput);
+                            ParkingList[newSpot - 1] = temp;
+                            ParkingList[index] = null;
 
-                    }
-                    else if (ParkingList[index].Contains("/"))
-                    {
-                        string[] mcSplit = ParkingList[index].Split("/");
-                        if (mcSplit[0] == "MC#" + userInput)
-                        {
-                            string temp = string.Join("/MC#", ParkingList[newSpot - 1], userInput);
-                            ParkingList[newSpot - 1] = temp;
-                            ParkingList[index] = mcSplit[1];
                         }
-                        else if (mcSplit[1] == "MC#" + userInput)
+                        else if (ParkingList[index].Contains("/"))
                         {
-                            string temp = string.Join("/MC#", ParkingList[newSpot - 1], userInput);
-                            ParkingList[newSpot - 1] = temp;
-                            ParkingList[index] = mcSplit[0];
+                            string[] mcSplit = ParkingList[index].Split("/");
+                            if (mcSplit[0] == "MC#" + userInput)
+                            {
+                                string temp = string.Join("/MC#", ParkingList[newSpot - 1], userInput);
+                                ParkingList[newSpot - 1] = temp;
+                                ParkingList[index] = mcSplit[1];
+                            }
+                            else if (mcSplit[1] == "MC#" + userInput)
+                            {
+                                string temp = string.Join("/MC#", ParkingList[newSpot - 1], userInput);
+                                ParkingList[newSpot - 1] = temp;
+                                ParkingList[index] = mcSplit[0];
+                            }
                         }
                     }
+
                 }
-
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Moving vehicle {0} to new spot {1}", userInput, newSpot);
+                StandardReturnText();
             }
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Moving vehicle {0} to new spot {1}", userInput, newSpot);
-            StandardReturnText();
-        }
             else
             {
                 Console.Clear();
@@ -607,51 +607,51 @@ namespace PragueParking
                 Console.WriteLine("Vehicle {0} is not parked here", userInput);
                 StandardReturnText();
 
-    }
-}                                       // Method for moving an Mc to another index in out array
-static void Tickets()
-{
-    int count = 1;
-    foreach (var Ticket in TicketList)
-    {
-        if (Ticket == null)
+            }
+        }                                        // Method for moving an Mc to another index in out array
+        static void Tickets()
         {
-            continue;
+            int count = 1;
+            foreach (var Ticket in TicketList)
+            {
+                if (Ticket == null)
+                {
+                    continue;
 
-        }
-        else
+                }
+                else
+                {
+                    Console.WriteLine("{0}:{1}", count, Ticket);
+                    count++;
+                }
+            }
+            StandardReturnText();
+        }                                       // Method for lopping true our Ticker array, contains License plate and time when parked
+        static int FindTicket(string userInput)
         {
-            Console.WriteLine("{0}:{1}", count, Ticket);
-            count++;
-        }
-    }
-    StandardReturnText();
-}                                      // Method for lopping true our Ticker array, contains License plate and time when parked
-static int FindTicket(string userInput)
-{
-    for (int i = 0; i < TicketList.Length; i++)
-    {
-        if (TicketList[i] != null && TicketList[i].Contains(userInput))
-        {
-            int index = i;
-            return index;
-        }
-    }
-    return 0;
-}                   // Method used for finding the index in our Ticket arra
-public static void MenuDesign()                                // Menu design
+            for (int i = 0; i < TicketList.Length; i++)
+            {
+                if (TicketList[i] != null && TicketList[i].Contains(userInput))
+                {
+                    int index = i;
+                    return index;
+                }
+            }
+            return 0;
+        }                     // Method used for finding the index in our Ticket arra
+        public static void MenuDesign()                                // Menu design
 
-{
-    Console.WriteLine("\n" +
-" 00000011                                                   000000ba                    11       oo                   \n" +
-" 00    `01                                                  00    `01                   00                            \n" +
-" 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n" +
-" 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n" +
-" 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n" +
-" 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n" +
-"oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n" +
-"                              d0000P                                                                          d0000P  \n");
-}
+        {
+            Console.WriteLine("\n" +
+        " 00000011                                                   000000ba                    11       oo                   \n" +
+        " 00    `01                                                  00    `01                   00                            \n" +
+        " 00110011' 00d0001. .100001. .100001. 11    11 .100001.     00110011' .100001. 00d0001. 00  .11  11 00d0001. .100001. \n" +
+        " 00        00'  `00 00'  `00 00'  `00 00    00 00ooood8     00        00'  `00 00'  `00 00008    00 00'  `00 00'  `00 \n" +
+        " 00        00       00.  .00 00.  .00 00.  .00 00.  ...     00        00.  .00 00       00  `01. 00 00    00 00.  .00 \n" +
+        " 11        11       `00008P8 `0000P00 `00008P' `00008P'     11        `00008P8 11       11   `00 11 11    11 `0000P00 \n" +
+        "oooooooooooooooooooooooooooooo~~~~.00~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~~.00~\n" +
+        "                              d0000P                                                                          d0000P  \n");
+        }
     }
 }
 
